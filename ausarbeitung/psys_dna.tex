@@ -1,0 +1,92 @@
+\documentclass[journal]{IEEEtran}
+
+% Use UTF-8 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+
+% German qoutes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{csquotes}
+
+% Graphics %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{pgfplots}
+
+% Enumerations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{enumerate}
+
+% Abbreviations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[printonlyused]{acronym}
+
+%Unterschriften %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[footnotesize, tablewithin=section]{caption}
+
+% Literaturverzeichnis deutsch %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[numbers]{natbib}
+\usepackage[sectcntreset]{bibtopic}
+
+% URLs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+% Listings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+\lstset{ 
+  basicstyle=\footnotesize, breaklines=true 
+}
+
+% correct bad hyphenation here %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hyphenation{
+  op-tical net-works semi-conduc-tor bei-spiels-weise konfi-guriert
+  zwi-schen ejabberd er-rei-chen er-leich-tert hier-bei SIMON alice
+  ASSCII che-mische ver-gleich-bare be-stimmten
+}
+
+%Source code listings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+
+
+\begin{document}
+
+\title{Smith-Waterman sequence alignment mittels OpenCL}
+\specialpapernotice{(Ausarbeitung)}
+\author{
+  Laurence Bortfeld (l.bortfeld@gmail.com), \\
+  Wojciech Konitzer (w.konitzer@student.htw-berlin.de)
+  % Prüfer: Prof. Dr. Hermann Heßling
+}
+
+% The paper headers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\markboth{Distributed Systems and Parallel Processing SOSE 2013, HTW-Berlin}{}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+Abstract
+\end{abstract}
+
+\begin{IEEEkeywords}
+  DNA
+\end{IEEEkeywords}
+
+\input ./psys_dna_text
+
+% Literatur %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Literatur}
+\bibliographystyle{alphadin}
+\begin{btSect}{./bib/print}
+\btPrintCited
+\end{btSect}
+\bibliographystyle{unsrt}
+\begin{btSect}{./bib/internet}
+\section*{Internetquellen}
+\btPrintCited
+\end{btSect}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

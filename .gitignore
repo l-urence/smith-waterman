@@ -1,0 +1,15 @@
+*.aux
+*.lof
+*.log
+*.out
+*.pdf
+*.gz
+*.toc
+*.bbl
+*.blg
+*.odg#
+*.bak
+.DS_Store
+psys_dna.tex
+psys_dna.texbak
+psys_dna.tex
