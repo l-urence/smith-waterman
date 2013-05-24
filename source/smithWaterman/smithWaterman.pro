@@ -4,7 +4,6 @@ SOURCES   = \
     gui.cpp \
     filehandler.cpp
 HEADERS   = \
-    matrix.h \
     single.h \
     gui.h \
     filehandler.h

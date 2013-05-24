@@ -1,13 +1,24 @@
 Ist momentan noch mit Qt GUI konfiguriert. Wird noch zu reiner shell anwendung angepasst. Muss noch schauen, ob im source Verzeichnis unmittelbar der source code liegen kann.
 
-1) Wenn der Qt Creator installiert ist, einfach auf smithWaterman.pro klicken und der Quellcode kann bearbeitet werden.
+1) Wenn der Qt Creator installiert ist, einfach auf smithWaterman.pro. Anschliessend links im Fenster auf "Projekte" klicken, oben "Ausfuehren" auswaehlen und unter Argumente folgende Zeile einfuegen:
 
-Jedoch werden in der main Methode zwei Argumente erwartet. 
-./a.out seq1.txt seq2.txt
-Muss noch feststellen, wie man Qt beim Ausführen Argumente übergeben kann.
+../smithWaterman/seq1.txt ../smithWaterman/seq2.txt
 
-Die txt Dateien befinden sich im smithWaterman Verzeichnis
+Auf Play klicken.
 
-2) Per Terminal kompilieren, Beispiel:
-wojtek@Notebook:~/qt_workspace/smithWaterman$ g++ -L /opt/AMDAPP/lib/x86_64/ -I /opt/AMDAPP/include/ main.cpp single.cpp filehandler.cpp -lOpenCL
+(Hinweis: Das Verzeichnis "smithWaterman-build-desktop-Qt_4_8_3_in_Pfad__System__Release" wird von Qt benötigt. Die txt Dateien befinden sich im smithWaterman Verzeichnis.)
+
+2) 
+a) Per Terminal kompilieren, Beispiel:
+wojtek@Notebook:~/qt_workspace/smithWaterman$ g++ -o smithWaterman -L /opt/AMDAPP/lib/x86_64/ -I /opt/AMDAPP/include/ main.cpp single.cpp filehandler.cpp -lOpenCL
+
+b) Ausfuehren:
+./smithWaterman seq1.txt seq2.txt
+
+ODER per make (sollte die Meldung "make: Für das Ziel »first« ist nichts zu tun." erscheinen, dann gibt es keine Aenderungen im Quellcode seit dem letzten make.) 
+Befehle: 
+a) make
+Ausfuehren:
+b) ./smithWaterman seq1.txt seq2.txt
+
 

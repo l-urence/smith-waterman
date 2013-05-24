@@ -14,7 +14,7 @@ void FileHandler::checkFile(int open, char filename[]){
   }
 }
 
-string FileHandler::readSequenceFromFile(ifstream& f)
+string FileHandler::readSequencesFromFile(ifstream& f)
 {
   // overflows.
   string seq;

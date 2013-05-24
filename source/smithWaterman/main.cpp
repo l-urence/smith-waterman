@@ -30,11 +30,11 @@ int main(int argc, char *argv[])
 
       streamOfSequenceA.open(filenameA);
       fileHandler->checkFile(! streamOfSequenceA,filenameA);
-      sequenceA = fileHandler->readSequenceFromFile(streamOfSequenceA);
+      sequenceA = fileHandler->readSequencesFromFile(streamOfSequenceA);
 
       streamOfSequenceB.open(filenameB);
       fileHandler->checkFile(! streamOfSequenceB,filenameB);
-      sequenceB = fileHandler->readSequenceFromFile(streamOfSequenceB);
+      sequenceB = fileHandler->readSequencesFromFile(streamOfSequenceB);
 
 
       Single *single = new Single(10,9);
