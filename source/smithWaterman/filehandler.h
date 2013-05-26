@@ -10,10 +10,11 @@ using namespace std;
 
 class FileHandler
 {
-public:
-    FileHandler();
-    void checkFile(int open, char filename[]);
-    string readSequencesFromFile(ifstream& f);
+    public:
+    
+        FileHandler();
+        void checkFile(int open, char filename[]);
+        string readSequencesFromFile(ifstream& f);
 };
 
 #endif // FILEHANDLER_H
