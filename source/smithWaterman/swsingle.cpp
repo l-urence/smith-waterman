@@ -11,59 +11,70 @@ SwSingle::SwSingle()
 
 SwSingle::SwSingle(string sequenceA, string sequenceB) // Kostruktor
 {
-    initMatrix(sequenceA, sequenceB);
+    this->sequenceA = sequenceA;
+    this->sequenceB = sequenceB;
 }
 
 SwSingle::~SwSingle()// Destruktor
 {
-
+    this->sequenceA = "";
+    this->sequenceB = "";
 }
 
-void SwSingle::printMatrix(string sequenceA, string sequenceB){
-    // loop for rows
-    for(int i=0; i<sequenceA.size(); i++) {
-        //loop for columns
-        for(int j=0; j<sequenceB.size(); j++) {
-            cout << matrix[i][j];
+void SwSingle::printMatrix(){
+    for(unsigned int i=0; i<this->sequenceA.length(); i++){
+        if(i==0)cout<<"  ";
+        cout<<this->sequenceA[i]<<" ";
+    }
+    cout<<endl;
+
+    for(unsigned int i=0; i<this->matrix.size(); i++) {
+        cout<<sequenceB[i]<<" ";
+        for(unsigned int j=0; j<this->matrix[i].size(); j++) {
+            cout<< this->matrix[i][j]<<" ";
         }
-        cout << "\n";
+
+        cout<<endl;
     }
 }
 
 // init matrix
-void SwSingle::initMatrix(string sequenceA, string sequenceB){
-      for(int i=0;i<sequenceA.size();i++){
-           for(int j=0;j<sequenceB.size();j++){
-             matrix.push_back(std::vector<int> (0, 0));
-           }
-      }
-
-}
-
-void SwSingle::fillSwScoreMatrix(string sequenceA, string sequenceB){
-    int match = 1;
-    int mismatch = 0;
-    int gap = 0;
-
-    /*for(int i=0; i<sequenceA.length(); i++){
-        for(int j=0; j<sequenceB.length(); j++){
-            if(sequenceA[i]==sequenceB[j]){
-                //match += 1;
-                //matrix[i][j]=match;
-            }
+void SwSingle::initMatrix(){
+    /*for (unsigned int i = 0; i < this->sequenceA.size(); i++) {
+        vector<int> row; // Create an empty row
+        for (unsigned int j = 0; j < this->sequenceB.size(); j++) {
+            row.push_back(0); // Add an element (column) to the row
         }
+        matrix.push_back(row); // Add the row to the main vector
     }*/
 }
 
+//TODO
+void SwSingle::fillSwScoreMatrix(){
+    int score = 1;
+    for(unsigned int i=0; i<this->sequenceA.length(); i++){
+        vector<int> row; // current row
+        for(unsigned int j=0; j<this->sequenceB.length(); j++){
+            if(this->sequenceA[i]==this->sequenceB[j]){
+                score=1;
+            }else{
+                score=0;
+            }
+         row.push_back(score);
+        }
+        matrix.push_back(row); // Add the row to the main vector
+    }
+}
+
 int SwSingle::scoreSwMatrixElement(char charA,char charB){
-  double result;
+  double result=0;
   if(charA==charB){
-      result=1;
+      //result=1;
     }
   else{
-      if(result>0){
+      /*if(result>0){
         result=-1;
-      }
+      }*/
     }
   return result;
 }
@@ -71,12 +82,10 @@ int SwSingle::scoreSwMatrixElement(char charA,char charB){
 double SwSingle::find_array_max(double array[],int length){
 
   double max = array[0];
-  int ind = 0;
 
   for(int i = 1; i<length; i++){
       if(array[i] > max){
-    max = array[i];
-    ind = i;
+           max = array[i];
       }
   }
   return max;

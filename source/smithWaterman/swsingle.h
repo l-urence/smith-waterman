@@ -11,16 +11,18 @@ class SwSingle
     private:
         //int **matrix = 0; //dynamisches zweidimensionales array in C++ nervig, besser vectoren...
         vector< vector<int> > matrix;
+        string sequenceA;
+        string sequenceB;
 
     public:
         SwSingle();
         SwSingle(string sequenceVectorA, string sequenceVectorB);
         ~SwSingle();
-        void printMatrix(string sequenceA, string sequence);
-        void initMatrix(string sequenceA, string sequenceB);
+        void printMatrix();
+        void initMatrix();
         int scoreSwMatrixElement(char charA,char charB);
         double find_array_max(double array[],int length);
-        void fillSwScoreMatrix(std::string sequenceA, std::string sequenceB);
+        void fillSwScoreMatrix();
 };
 
 #endif // SINGLE_H

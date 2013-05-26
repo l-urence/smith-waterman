@@ -42,8 +42,8 @@ int main(int argc, char *argv[])
     //create a matrix every two sequences
     SwSingle *swSingle = new SwSingle(sequenceVectorA[0],sequenceVectorB[0]);
     //TODO... loop...
-    swSingle->fillSwScoreMatrix(sequenceVectorA[0], sequenceVectorB[0]);
-    //swSingle->printMatrix(sequenceVectorA[0], sequenceVectorB[0]);
+    swSingle->fillSwScoreMatrix();
+    swSingle->printMatrix();
     //qDebug("test");
 
     //return app.exec();
