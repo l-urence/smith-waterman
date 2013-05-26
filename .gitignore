@@ -6,12 +6,14 @@
 *.toc
 *.bbl
 *.blg
-*.odg#
+*.odg
 *.bak
+*.dylib
+*.xcodeproj
 ausarbeitung/*.pdf
 .buildlog
 *~
 .DS_Store
-psys_dna.tex
 psys_dna.texbak
 psys_dna.tex
+psys_dna_text.tex
