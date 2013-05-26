@@ -6,7 +6,7 @@
 #include <fstream>
 //#include "gui.h"
 #include "filehandler.h"
-#include "single.h"
+#include "swsingle.h"
 
 using namespace std;
 
@@ -40,9 +40,10 @@ int main(int argc, char *argv[])
     fileHandler->printSequences(sequenceVectorA);
     fileHandler->printSequences(sequenceVectorB);
     //create a matrix every two sequences
-    Single *single = new Single(sequenceVectorA,sequenceVectorB);
-    single->fillMatrix(sequenceVectorA[0], sequenceVectorB[0]);
-    single->printMatrix();
+    SwSingle *swSingle = new SwSingle(sequenceVectorA[0],sequenceVectorB[0]);
+    //TODO... loop...
+    swSingle->fillSwScoreMatrix(sequenceVectorA[0], sequenceVectorB[0]);
+    //swSingle->printMatrix(sequenceVectorA[0], sequenceVectorB[0]);
     //qDebug("test");
 
     //return app.exec();
