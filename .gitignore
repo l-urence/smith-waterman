@@ -8,7 +8,7 @@
 *.blg
 *.odg#
 *.bak
-*.pdf
+ausarbeitung/*.pdf
 *~
 .DS_Store
 psys_dna.tex
