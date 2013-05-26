@@ -15,29 +15,33 @@ int main(int argc, char *argv[])
 {
     //QApplication app(argc, argv);
 
-   // Gui gui;
-   // gui.show();
+    // Gui gui;
+    // gui.show();
 
-      if(argc!=3){
-      }
+    //check arguments
+    if(argc!=3){
+    }
 
-      char *filenameA = argv[1];
-      char *filenameB = argv[2];
-      string sequenceA, sequenceB;
-      FileHandler *fileHandler = new FileHandler();
+    char *filenameA = argv[1];
+    char *filenameB = argv[2];
+    vector<string> sequenceVectorA, sequenceVectorB;
+    FileHandler *fileHandler = new FileHandler();
 
-      ifstream streamOfSequenceA, streamOfSequenceB;
-
-      streamOfSequenceA.open(filenameA);
-      fileHandler->checkFile(! streamOfSequenceA,filenameA);
-      sequenceA = fileHandler->readSequencesFromFile(streamOfSequenceA);
-
-      streamOfSequenceB.open(filenameB);
-      fileHandler->checkFile(! streamOfSequenceB,filenameB);
-      sequenceB = fileHandler->readSequencesFromFile(streamOfSequenceB);
-
-
-      Single *single = new Single(10,9);
+    ifstream streamOfSequenceA, streamOfSequenceB;
+    //open file a and fill vector a with sequences
+    streamOfSequenceA.open(filenameA);
+    fileHandler->checkFile(! streamOfSequenceA,filenameA);
+    sequenceVectorA = fileHandler->readSequencesFromFile(streamOfSequenceA);
+    //open file b and fill vector b with sequences
+    streamOfSequenceB.open(filenameB);
+    fileHandler->checkFile(! streamOfSequenceB,filenameB);
+    sequenceVectorB = fileHandler->readSequencesFromFile(streamOfSequenceB);
+    //print sequences
+    fileHandler->printSequences(sequenceVectorA);
+    fileHandler->printSequences(sequenceVectorB);
+    //create a matrix every two sequences
+    Single *single = new Single(sequenceVectorA,sequenceVectorB);
+    single->fillMatrix(sequenceVectorA[0], sequenceVectorB[0]);
     single->printMatrix();
     //qDebug("test");
 
