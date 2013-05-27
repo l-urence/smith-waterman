@@ -54,8 +54,8 @@ void SwSingle::calculateAlignments(){
     for(int i=1;i<=seqALength;i++){
         for(int j=1;j<=seqBLength;j++){
             temp[0] = matrix[i-1][j-1]+scoreSwMatrixElement(sequenceA[i-1],sequenceB[j-1]);
-            temp[1] = matrix[i-1][j];
-            temp[2] = matrix[i][j-1];
+            temp[1] = matrix[i-1][j]-1;
+            temp[2] = matrix[i][j-1]-1;
             temp[3] = 0.;
             matrix[i][j] = findMaxElement(temp,4);
 
@@ -99,7 +99,7 @@ void SwSingle::calculateAlignments(){
     int next_i=I_i[current_i][current_j];
     int next_j=I_j[current_i][current_j];
     int tick=0;
-    char consensus_a[seqALength],consensus_b[seqBLength];
+    char consensus_a[seqALength+seqBLength+2],consensus_b[seqBLength+seqALength+2];
 
     while(((current_i!=next_i) || (current_j!=next_j)) && (next_j!=0) && (next_i!=0)){
     if(next_i==current_i)  consensus_a[tick] = '-';                  // deletion in A
