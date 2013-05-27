@@ -13,16 +13,18 @@ class SwSingle
         vector< vector<int> > matrix;
         string sequenceA;
         string sequenceB;
+        int ind;
+        void printMatrix();
+        void printAlignments(int tick);
 
     public:
         SwSingle();
         SwSingle(string sequenceVectorA, string sequenceVectorB);
         ~SwSingle();
-        void printMatrix();
         void initMatrix();
         int scoreSwMatrixElement(char charA,char charB);
-        double find_array_max(double array[],int length);
-        void fillSwScoreMatrix();
+        int findMaxElement(int array[],int length);
+        void calculateAlignments();
 };
 
 #endif // SINGLE_H

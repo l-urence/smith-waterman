@@ -37,13 +37,17 @@ int main(int argc, char *argv[])
     fileHandler->checkFile(! streamOfSequenceB,filenameB);
     sequenceVectorB = fileHandler->readSequencesFromFile(streamOfSequenceB);
     //print sequences
-    fileHandler->printSequences(sequenceVectorA);
-    fileHandler->printSequences(sequenceVectorB);
-    //create a matrix every two sequences
-    SwSingle *swSingle = new SwSingle(sequenceVectorA[0],sequenceVectorB[0]);
-    //TODO... loop...
-    swSingle->fillSwScoreMatrix();
-    swSingle->printMatrix();
+    //fileHandler->printSequences(sequenceVectorA);
+    //fileHandler->printSequences(sequenceVectorB);
+
+    //create a matrix every two sequences ... todo "in swsingle klasse iterieren und nicht hier!"
+    for(unsigned int i=0; i<sequenceVectorA.size(); i++){
+        for(unsigned int j=0; j<sequenceVectorB.size(); j++){
+            SwSingle *swSingle = new SwSingle(sequenceVectorA[i],sequenceVectorB[j]);
+            swSingle->calculateAlignments();
+        }
+    }
+
     //qDebug("test");
 
     //return app.exec();

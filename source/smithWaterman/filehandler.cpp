@@ -10,7 +10,7 @@ void FileHandler::checkFile(int open, char filename[]){
       cout << "Error: Can't open the file "<<filename<<endl;
       exit(1);
   }else{
-      cout<<"Opened file "<<filename<<endl;
+      //cout<<"Opened file "<<filename<<endl;
   }
 }
 
@@ -22,7 +22,7 @@ vector<string> FileHandler::readSequencesFromFile(ifstream& f)
   while( f.good() )
     {
         f.getline(line,5000);
-        cout << "Line:" << line << endl; //test output
+        //cout << "Line:" << line << endl; //test output
         if( line[0] == 0 || line[0]=='#')
         continue;
         seq = strToupper(line);
