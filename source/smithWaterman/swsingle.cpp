@@ -116,20 +116,23 @@ void SwSingle::calculateAlignments(){
     }
 
     // Output of the consensus motif to the console
-
-
-
     cout<<endl<<"***********************************************"<<endl;
     cout<<"The alignment of the sequences"<<endl<<endl;
     for(int i=0;i<seqALength;i++){cout<<this->sequenceA[i];}; cout<<"  and"<<endl;
     for(int i=0;i<seqBLength;i++){cout<<this->sequenceB[i];}; cout<<"  are:"<<endl<<endl;
+
+    //cout<<"tick="<<tick;
 
     for(int i=tick-1;i>=0;i--){
         cout<<consensus_a[i];
     }
     cout<<endl;
     for(int i=tick-1;i>=0;i--){
-        cout<<"|";
+            if(consensus_a[i]==consensus_b[i]){
+                cout<<"|";
+            }else{
+                cout<<" ";
+            }
     }
     cout<<endl;
     for(int j=tick-1;j>=0;j--){
