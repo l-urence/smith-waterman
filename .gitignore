@@ -9,6 +9,7 @@
 *.odg#
 *.bak
 *.pdf
+*~
 .DS_Store
 psys_dna.tex
 psys_dna.texbak
