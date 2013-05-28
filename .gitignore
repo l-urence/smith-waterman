@@ -15,6 +15,7 @@ ausarbeitung/*.pdf
 *~
 *.o
 .DS_Store
+build
 psys_dna.texbak
 psys_dna.tex
 psys_dna_text.tex
