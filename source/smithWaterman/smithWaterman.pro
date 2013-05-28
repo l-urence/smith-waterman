@@ -1,12 +1,12 @@
 SOURCES   = \
             main.cpp \
-    single.cpp \
     gui.cpp \
-    filehandler.cpp
+    filehandler.cpp \
+    swsingle.cpp
 HEADERS   = \
-    single.h \
     gui.h \
-    filehandler.h
+    filehandler.h \
+    swsingle.h
 
 # openCl
 INCLUDEPATH += /opt/AMDAPP/include/
