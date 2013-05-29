@@ -35,8 +35,8 @@ void SwSingle::initMatrix(){
 
 void SwSingle::calculateAlignments(){
 
-    int seqALength=this->sequenceA.length();
-    int seqBLength=this->sequenceB.length();
+    long seqALength=this->sequenceA.length();
+    long seqBLength=this->sequenceB.length();
 
     for(unsigned int i=0; i<this->sequenceA.length()+1; i++){
         vector<int> row; // current row

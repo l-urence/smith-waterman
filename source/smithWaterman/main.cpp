@@ -1,10 +1,17 @@
 
 //#include <QtGui>
-#include <CL/cl.h>
+
+// Use the right header depending on the platform.
+#ifdef __APPLE__
+    #include "OpenCL/opencl.h"
+#else
+    #include "CL/cl.h"
+#endif
+
+//#include "gui.h"
 #include <iostream>
 #include <string.h>
 #include <fstream>
-//#include "gui.h"
 #include "filehandler.h"
 #include "swsingle.h"
 
