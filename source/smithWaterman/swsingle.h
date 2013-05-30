@@ -3,13 +3,14 @@
 
 #include <string>
 #include <vector>
+#include <stdio.h>
+#include <iostream>
 
 using namespace std;
 
 class SwSingle
 {
     private:
-        //int **matrix = 0; //dynamisches zweidimensionales array in C++ nervig, besser vectoren...
         vector< vector<int> > matrix;
         string sequenceA;
         string sequenceB;
@@ -19,9 +20,6 @@ class SwSingle
 
     public:
         SwSingle();
-        SwSingle(string sequenceVectorA, string sequenceVectorB);
-        ~SwSingle();
-        void initMatrix();
         int scoreSwMatrixElement(char charA,char charB);
         int findMaxElement(int array[],int length);
         void calculateAlignments();

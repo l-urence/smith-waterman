@@ -12,13 +12,9 @@
     #include "CL/cl.h"
 #endif
 
-// #include <QtGui>
-// #include "gui.h"
-
 using namespace std;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     // Check number of given arguments. Mybe we use:
     // http://www.boost.org/doc/libs/1_53_0/doc/html/program_options.html
     if (argc != 3) {
@@ -30,25 +26,21 @@ int main(int argc, char *argv[])
     char *filenameB = argv[2];
     vector<string> sequenceVectorA, sequenceVectorB;
     FileHandler *fileHandler = new FileHandler();
-
     ifstream streamOfSequenceA, streamOfSequenceB;
+    
     //open file a and fill vector a with sequences
     streamOfSequenceA.open(filenameA);
     fileHandler->checkFile(! streamOfSequenceA, filenameA);
     sequenceVectorA = fileHandler->readSequencesFromFile(streamOfSequenceA);
+    
     //open file b and fill vector b with sequences
     streamOfSequenceB.open(filenameB);
     fileHandler->checkFile(!streamOfSequenceB, filenameB);
     sequenceVectorB = fileHandler->readSequencesFromFile(streamOfSequenceB);
-    //print sequences
-    //fileHandler->printSequences(sequenceVectorA);
-    //fileHandler->printSequences(sequenceVectorB);
 
-    //create a matrix every two sequences ... todo "in swsingle klasse iterieren und nicht hier!"
     SwSingle *swSingle = new SwSingle();
     for(unsigned int i=0; i<sequenceVectorA.size(); i++){
         for(unsigned int j=0; j<sequenceVectorB.size(); j++){
-            // SwSingle *swSingle = new SwSingle(sequenceVectorA[i],sequenceVectorB[j]);
             swSingle->setSequences(sequenceVectorA[i], sequenceVectorB[i]);
             swSingle->calculateAlignments();
         }
