@@ -1,32 +1,29 @@
+#include <iostream>
+#include <string.h>
+#include <fstream>
+#include <cstdlib>
+#include "filehandler.h"
+#include "swsingle.h"
 
-//#include <QtGui>
-
-// Use the right header depending on the platform.
+// Use the right openCL header depending on the platform.
 #ifdef __APPLE__
     #include "OpenCL/opencl.h"
 #else
     #include "CL/cl.h"
 #endif
 
-//#include "gui.h"
-#include <iostream>
-#include <string.h>
-#include <fstream>
-#include "filehandler.h"
-#include "swsingle.h"
+// #include <QtGui>
+// #include "gui.h"
 
 using namespace std;
 
-//! [main function]
 int main(int argc, char *argv[])
 {
-    //QApplication app(argc, argv);
-
-    // Gui gui;
-    // gui.show();
-
-    //check arguments
-    if(argc!=3){
+    // Check number of given arguments. Mybe we use:
+    // http://www.boost.org/doc/libs/1_53_0/doc/html/program_options.html
+    if (argc != 3) {
+        cout << "Not enough arguments" << endl;
+        return EXIT_FAILURE;
     }
 
     char *filenameA = argv[1];
@@ -37,11 +34,11 @@ int main(int argc, char *argv[])
     ifstream streamOfSequenceA, streamOfSequenceB;
     //open file a and fill vector a with sequences
     streamOfSequenceA.open(filenameA);
-    fileHandler->checkFile(! streamOfSequenceA,filenameA);
+    fileHandler->checkFile(! streamOfSequenceA, filenameA);
     sequenceVectorA = fileHandler->readSequencesFromFile(streamOfSequenceA);
     //open file b and fill vector b with sequences
     streamOfSequenceB.open(filenameB);
-    fileHandler->checkFile(! streamOfSequenceB,filenameB);
+    fileHandler->checkFile(!streamOfSequenceB, filenameB);
     sequenceVectorB = fileHandler->readSequencesFromFile(streamOfSequenceB);
     //print sequences
     //fileHandler->printSequences(sequenceVectorA);
@@ -54,10 +51,6 @@ int main(int argc, char *argv[])
             swSingle->calculateAlignments();
         }
     }
-
-    //qDebug("test");
-
-    //return app.exec();
+    
+    return EXIT_SUCCESS;
 }
-
-//! [main function]
