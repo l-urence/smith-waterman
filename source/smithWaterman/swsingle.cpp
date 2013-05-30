@@ -34,7 +34,7 @@ void SwSingle::initMatrix(){
 
 
 void SwSingle::calculateAlignments(){
-
+    this->matrix.clear(); // TODO: check if matrix get clean recursively.
     long seqALength=this->sequenceA.length();
     long seqBLength=this->sequenceB.length();
 
@@ -182,5 +182,10 @@ void SwSingle::printMatrix(){
         }
         cout<<endl;
     }
+}
+
+void SwSingle::setSequences(string a, string b) {
+    this->sequenceA = a;
+    this->sequenceB = b;
 }
 

@@ -45,12 +45,17 @@ int main(int argc, char *argv[])
     //fileHandler->printSequences(sequenceVectorB);
 
     //create a matrix every two sequences ... todo "in swsingle klasse iterieren und nicht hier!"
+    SwSingle *swSingle = new SwSingle();
     for(unsigned int i=0; i<sequenceVectorA.size(); i++){
         for(unsigned int j=0; j<sequenceVectorB.size(); j++){
-            SwSingle *swSingle = new SwSingle(sequenceVectorA[i],sequenceVectorB[j]);
+            // SwSingle *swSingle = new SwSingle(sequenceVectorA[i],sequenceVectorB[j]);
+            swSingle->setSequences(sequenceVectorA[i], sequenceVectorB[i]);
             swSingle->calculateAlignments();
         }
     }
+    
+    // Clean up
+    delete swSingle;
     
     return EXIT_SUCCESS;
 }

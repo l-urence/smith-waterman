@@ -25,6 +25,7 @@ class SwSingle
         int scoreSwMatrixElement(char charA,char charB);
         int findMaxElement(int array[],int length);
         void calculateAlignments();
+        void setSequences(string a, string b);
 };
 
 #endif // SINGLE_H
