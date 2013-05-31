@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     SwSingle *swSingle = new SwSingle();
     for(unsigned int i=0; i<sequenceVectorA.size(); i++){
         for(unsigned int j=0; j<sequenceVectorB.size(); j++){
-            swSingle->setSequences(sequenceVectorA[i], sequenceVectorB[i]);
+            swSingle->setSequences(sequenceVectorA[i], sequenceVectorB[j]);
             swSingle->calculateAlignments();
         }
     }
