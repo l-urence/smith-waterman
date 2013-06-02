@@ -119,7 +119,7 @@ void SwSingle::printMatrix() {
     }
 }
 
-void SwSingle::printAlignments(int seqALength, int seqBLength, char* a, char* b, int tick, int maxScore){
+void SwSingle::printAlignments(long seqALength, long seqBLength, char* a, char* b, int tick, int maxScore){
     cout<<"The alignment of the sequences"<<endl<<endl;
 
     for (int i=0; i < seqALength; i++) {
