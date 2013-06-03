@@ -17,7 +17,7 @@ class SwSingle
         int ind; //indel score
         int iMaxScore, jMaxScore;
         void printMatrix();
-        void printAlignments(int seqALength, int seqBLength, char* a, char* b, int tick, int maxScore);
+        void printAlignments(long seqALength, long seqBLength, char* a, char* b, int tick, int maxScore);
         const static int GAP_PANELTY = -1;
         const static int MISMATCH_PANELTY = -1;
         const static int MATCH_PANELTY = 2;
