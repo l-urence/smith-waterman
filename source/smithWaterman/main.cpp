@@ -4,13 +4,14 @@
 #include <cstdlib>
 #include "filehandler.h"
 #include "swsingle.h"
+//#include "cll.h"
 
 // Use the right openCL header depending on the platform.
-#ifdef __APPLE__
+/*#ifdef __APPLE__
     #include "OpenCL/opencl.h"
 #else
     #include "CL/cl.h"
-#endif
+#endif*/
 
 using namespace std;
 
@@ -44,10 +45,26 @@ int main(int argc, char *argv[]) {
             swSingle->setSequences(sequenceVectorA[i], sequenceVectorB[j]);
             swSingle->calculateAlignments();
         }
-    }
-    
+    }  
     // Clean up
     delete swSingle;
-    
+
+    //OpenCL implementation
+   // printf("Hello, OpenCL\n");
+    //initialize our CL object, this sets up the context
+    //CL example;
+
+    //load and build our CL program from the file
+    //#include "part1.cl" //const char* kernel_source is defined in here
+    //example.loadProgram(kernel_source);
+
+
+    //initialize the kernel and send data from the CPU to the GPU
+    //example.popCorn();
+    //execute the kernel
+    //example.runKernel();
+    //exit(0);
+
+
     return EXIT_SUCCESS;
 }

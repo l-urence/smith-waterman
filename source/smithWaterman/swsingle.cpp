@@ -11,16 +11,16 @@ void SwSingle::calculateAlignments() {
 
     for (unsigned int i=0; i<this->sequenceA.length()+1; i++) {
         vector<int> row; // current row
-        
+
         for(unsigned int j=0; j<this->sequenceB.length()+1; j++) {
             row.push_back(0);
         }
-        
+
         matrix.push_back(row); // Add the row to the main vector
     }
 
     int tempArray[4];
-    
+
     // Index matrices to remember the 'path' for backtracking
     int I_i[seqALength+1][seqBLength+1], I_j[seqALength+1][seqBLength+1];
 
