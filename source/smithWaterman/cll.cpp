@@ -20,7 +20,7 @@ CL::CL()
     std::vector<cl::Platform> platforms;
     err = cl::Platform::get(&platforms);
     printf("cl::Platform::get(): %s\n", oclErrorString(err));
-    printf("number of platforms: %d\n", platforms.size());
+    printf("number of platforms: %d\n", (int)platforms.size());
     if (platforms.size() == 0) {
         printf("Platform size 0\n");
     }
@@ -56,7 +56,7 @@ CL::CL()
 
     context = cl::Context(CL_DEVICE_TYPE_GPU, properties);
     devices = context.getInfo<CL_CONTEXT_DEVICES>();
-    printf("number of devices %d\n", devices.size());
+    printf("number of devices %d\n", (int)devices.size());
 
     //create the command queue we will use to execute OpenCL commands
     ///command_queue = clCreateCommandQueue(context, devices[deviceUsed], 0, &err);

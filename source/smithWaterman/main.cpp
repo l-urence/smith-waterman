@@ -4,8 +4,24 @@
 #include <cstdlib>
 #include "filehandler.h"
 #include "swsingle.h"
-//#include "cll.h"
+#include "cll.h"
 
+/*
+ *@author Laurence Bortfeld
+ *@author Wojciech Konitzer
+ *
+ *OpenCL Tutorial:
+ * "...code works for me on my Macbook Pro (with Geforce 9400M) running
+ * Snow Leopard with the NVIDIA GPU SDK as well as
+ * on the Ubuntu 10.4 workstations..."
+http://enja.org/2010/07/20/adventures-in-opencl-part-1-5-cpp-bindings/
+
+Compile command example:
+g++ -o smithwaterman -L /opt/AMDAPP/lib/x86_64/ -I /opt/AMDAPP/include/ main.cpp swsingle.cpp filehandler.cpp cll.cpp util.cpp part1.cpp -lOpenCL
+
+start program:
+./smithwaterman seq1.txt seq2.txt
+*/
 // Use the right openCL header depending on the platform.
 /*#ifdef __APPLE__
     #include "OpenCL/opencl.h"
@@ -49,21 +65,21 @@ int main(int argc, char *argv[]) {
     // Clean up
     delete swSingle;
 
-    //OpenCL implementation
-   // printf("Hello, OpenCL\n");
+    /**********  OpenCL implementation  ***********************************/
+    printf("Hello, OpenCL\n");
     //initialize our CL object, this sets up the context
-    //CL example;
+    CL example;
 
-    //load and build our CL program from the file
-    //#include "part1.cl" //const char* kernel_source is defined in here
-    //example.loadProgram(kernel_source);
+    //load and build our CL program from the file //TODO: Add smithwaterman.cl
+    #include "part1.cl" //const char* kernel_source is defined in here
+    example.loadProgram(kernel_source);
 
 
     //initialize the kernel and send data from the CPU to the GPU
-    //example.popCorn();
+    example.popCorn();
     //execute the kernel
-    //example.runKernel();
-    //exit(0);
+    example.runKernel();
+    exit(0);
 
 
     return EXIT_SUCCESS;
