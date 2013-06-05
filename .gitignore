@@ -12,6 +12,7 @@
 *.xcodeproj
 ausarbeitung/*.pdf
 .buildlog
+*.build
 *~
 *.o
 *.pro*

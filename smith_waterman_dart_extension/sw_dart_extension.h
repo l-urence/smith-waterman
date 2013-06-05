@@ -9,9 +9,10 @@
 #ifndef __smith_waterman_dart_extension__sw_dart_extension__
 #define __smith_waterman_dart_extension__sw_dart_extension__
 
+#include <stdlib.h>
+#include <stdio.h>
 #include "swsingle.h"
-#include "stdlib.h"
-#include "stdio.h"
+#include "opencl_devices.h"
 #include "dart_api.h"
 
 

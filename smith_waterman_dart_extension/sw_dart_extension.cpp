@@ -1,23 +1,15 @@
-//
-//  sw_dart_extension.cpp
-//  smith_waterman_dart_extension
-//
-//  Created by Laurence Bortfeld on 30.05.13.
-//  Copyright (c) 2013 Hochschule fuer Technik und Wirtschaft. All rights reserved.
-//
+// Copyright (c) 2012, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
 #include "sw_dart_extension.h"
 
-// Forward declaration of ResolveName function.
 Dart_NativeFunction ResolveName(Dart_Handle name, int argc);
 
-// The name of the initialization function is the extension name followed
-// by _Init.
 DART_EXPORT Dart_Handle smith_waterman_dart_extension_Init(Dart_Handle parent_library) {
-    if (Dart_IsError(parent_library)) return parent_library;
+    if (Dart_IsError(parent_library)) { return parent_library; }
     
-    Dart_Handle result_code =
-    Dart_SetNativeResolver(parent_library, ResolveName);
+    Dart_Handle result_code = Dart_SetNativeResolver(parent_library, ResolveName);
     if (Dart_IsError(result_code)) return result_code;
     
     return Dart_Null();
@@ -28,47 +20,36 @@ Dart_Handle HandleError(Dart_Handle handle) {
     return handle;
 }
 
-
-char* helloDart(char *name) {
-    return name;
-}
-
-void helloDartWrapper(Dart_Port destPortId, Dart_Port replyPortId, Dart_CObject *message) {
+void echoNumber(Dart_Port desPort, Dart_Port replayPort, Dart_CObject *message) {
+    Dart_CObject result;
+    result.type = Dart_CObject::kInt32;
+    
     if (message->type == Dart_CObject::kArray &&
         1 == message->value.as_array.length) {
-        
-        Dart_CObject *param = message->value.as_array.values[0];
-
-        char *name = helloDart(param->value.as_string);
-        
-        if (name != NULL) {
-            Dart_CObject result;
-            result.value.as_string = name;
-            Dart_PostCObject(replyPortId, &result);
-            return;
-        }
+        // result.value.as_int32 = message->value.as_array.values[0]->value.as_int32;;
+        result.value.as_int32 = devices();
+    } else {
+        result.value.as_int32 = -1;
     }
+
+    Dart_PostCObject(replayPort, &result);
 }
 
-void helloDartServeicePort(Dart_NativeArguments arguments) {
+void echoNumberServicePort(Dart_NativeArguments arguments) {
     Dart_EnterScope();
-    
     Dart_SetReturnValue(arguments, Dart_Null());
-    Dart_Port servicePort = Dart_NewNativePort("helloDartService", helloDartWrapper, true);
-    
-    if (servicePort != ILLEGAL_PORT) {
-        Dart_Handle sendPort = HandleError(Dart_NewSendPort(servicePort));
-        Dart_SetReturnValue(arguments, sendPort);
+    Dart_Port service_port =
+    Dart_NewNativePort("EchoNumberService", echoNumber, true);
+    if (service_port != ILLEGAL_PORT) {
+        Dart_Handle send_port = HandleError(Dart_NewSendPort(service_port));
+        Dart_SetReturnValue(arguments, send_port);
     }
     Dart_ExitScope();
 }
 
-
-
 FunctionLookup function_list[] = {
-    {"helloDart_ServicePort", helloDartServeicePort},
+    {"echoNumber_ServicePort", echoNumberServicePort},
     {NULL, NULL}};
-
 
 Dart_NativeFunction ResolveName(Dart_Handle name, int argc) {
     if (!Dart_IsString(name)) return NULL;
