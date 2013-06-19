@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include "filehandler.h"
 #include "swsingle.h"
-#include "cll.h"
+//#include "cll.h"
 
 /*
  *@author Laurence Bortfeld
@@ -55,31 +55,35 @@ int main(int argc, char *argv[]) {
     fileHandler->checkFile(!streamOfSequenceB, filenameB);
     sequenceVectorB = fileHandler->readSequencesFromFile(streamOfSequenceB);
 
+    
     SwSingle *swSingle = new SwSingle();
-    for(unsigned int i=0; i<sequenceVectorA.size(); i++){
+    swSingle->setSequences("ACACACTAAAGG", "AAAAAAAAAAAAGG");
+    swSingle->calculateAlignments();
+    
+   /* for(unsigned int i=0; i<sequenceVectorA.size(); i++){
         for(unsigned int j=0; j<sequenceVectorB.size(); j++){
             swSingle->setSequences(sequenceVectorA[i], sequenceVectorB[j]);
             swSingle->calculateAlignments();
         }
-    }  
+    }  */
     // Clean up
     delete swSingle;
 
     /**********  OpenCL implementation  ***********************************/
     printf("Hello, OpenCL\n");
     //initialize our CL object, this sets up the context
-    CL example;
+//    CL example;
 
     //load and build our CL program from the file //TODO: Add smithwaterman.cl
-    #include "part1.cl" //const char* kernel_source is defined in here
-    example.loadProgram(kernel_source);
+    //#include "part1.cl" //const char* kernel_source is defined in here
+    //example.loadProgram(kernel_source);
 
 
     //initialize the kernel and send data from the CPU to the GPU
-    example.popCorn();
+  //  example.popCorn();
     //execute the kernel
-    example.runKernel();
-    exit(0);
+    //example.runKernel();
+    //exit(0);*/
 
 
     return EXIT_SUCCESS;

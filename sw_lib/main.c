@@ -11,20 +11,26 @@
 
 int main(int argc, const char *argv[])
 {
-    // char *s1 = "ACACACTA";
-    // char *s2 = "AGCACACA";
+    //char *s1 = "ACACACTAAA";
+    //char *s2 = "AGCACACAG";
+    char *s1 = "ACACACTAAAGG";
+    char *s2 = "AAAAAAAAAAAAGG";
+    //char *s1 = "ATGCAGT";
+    //char *s2 = "ATAAGT";
+    //char *s1 = "AAAAA";
+    //char *s2 = "AAA";
     
-    char *s1 = "AAUGCCAUUGACGG";
-    char *s2 = "CAGCCUCGCUUAG";
+    int m = (int) strlen(s2);
+    int n = (int) strlen(s1);
 
 
-    int j = (int) strlen(s1);
-    int i = (int) strlen(s2);
-
-
-    int **matrix = initMatrix(i, j);
+    int **matrix = initMatrix(m, n);
+    
     sw(s1, s2, matrix);
-    freeMatrix(matrix, i);
+    
+    printMatrix(matrix, m, n);
+    
+    freeMatrix(matrix, m);
     
     return 0;
 }

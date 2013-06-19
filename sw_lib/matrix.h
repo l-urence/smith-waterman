@@ -11,6 +11,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct position
 {
@@ -20,9 +21,11 @@ typedef struct position
 
 
 int **initMatrix(int m, int n);
+position **initMemory(int m, int n);
 void freeMatrix(int **matrix, int n);
 void freeMemory(position **memory, int n);
 position* maximumValue(int **matrix, int m, int n);
+void printMatrix(int **matrix, int m, int n);
 
 
 #endif

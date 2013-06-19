@@ -16,45 +16,52 @@ int match(char ai, char bj) {
     }
 }
 
-void sw(char *s1, char *s2, int **matrix) {
-    int m = ((int) strlen(s1));
-    int n = ((int) strlen(s2));
-    position** memory = (position**)malloc(n * sizeof(position**));
+void findMaximum(int **matrix, position **memory, int i, int j, char a, char b) {
+    int max = 0;
     
-    for (int i=1; i<=n; i++) {
-        char b = s2[i-1];
-        position pos;
-        memory[i] = (position *) malloc(m * sizeof(position));
+    int mm = matrix[i-1][j-1] + match(a, b);
+    if (mm > max) {
+        max = mm;
+        memory[i][j] = (position) {i - 1, j - 1};
+    }
+    
+    int md = matrix[i-1][j] + GAP;
+    if (md > max) {
+        max = md;
+        memory[i][j] = (position) {i - 1, j};
+    }
+    
+    int mi = matrix[i][j-1] + GAP;
+    if (mi > max) {
+        max = mi;
+        memory[i][j] = (position) {i, j - 1};
+    }
+    
+    if (max == 0) {
+        memory[i][j] = (position) {i, j};
+    }
+    
+    matrix[i][j] = max;
+}
+
+void sw(char *s1, char *s2, int **matrix) {
+    int m = ((int) strlen(s2));
+    int n = ((int) strlen(s1));
+    int max = m < n ? n : m;
+    position **memory = initMemory(m, n);
+    
+    for (int slice = 0; slice < 2 * max - 1; ++slice) {
+    	int z = slice < max ? 0 : slice - max + 1;
+    	for (int j = z; j <= slice - z; ++j) {
+            int ii = j + 1;
+            int jj = slice - j + 1;
+            if (ii <= m && jj <= n) {
+                // rprintf("(%i, %i)", ii, jj);
+                findMaximum(matrix, memory, j + 1, jj, s2[ii - 1], s1[jj - 1]);
+            }
+    	}
         
-        for (int j=1; j<=m; j++) {
-            char a = s1[j-1];
-            int max = 0;
-            
-            int mm = matrix[i-1][j-1] + match(a, b);
-            if (mm > max) {
-                max = mm;
-                pos = (position) {i - 1, j - 1};
-            }
-            
-            int md = matrix[i-1][j] + GAP;
-            if (md > max) {
-                max = md;
-                pos = (position) {i - 1, j};
-            }
-            
-            int mi = matrix[i][j-1] + GAP;
-            if (mi > max) {
-                max = mi;
-                pos = (position) {i, j - 1};
-            }
-            
-            if (max == 0) {
-                pos = (position) {i, j};
-            }
-            
-            memory[i][j] = pos;
-            matrix[i][j] = max;
-        }
+            printf("\n");
     }
     
     // Traceback
@@ -100,5 +107,5 @@ void sw(char *s1, char *s2, int **matrix) {
     printf("\n");
     
     free(currentPos);
-    freeMemory(memory, n);
+    freeMemory(memory, m);
 }

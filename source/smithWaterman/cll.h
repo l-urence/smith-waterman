@@ -6,7 +6,7 @@
 
 
 #include <vector>
-#include "CL/cl.hpp"
+//#include "CL/cl.hpp"
 
 class CL {
     public:

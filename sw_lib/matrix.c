@@ -8,17 +8,18 @@
 
 #include "matrix.h"
 
-void freeMatrix(int **matrix, int n) {
-    for (int i=0; i<n; i++) {
+void freeMatrix(int **matrix, int m) {
+    m = m + 1;
+    for (int i = 0; i < m; i++) {
         free(matrix[i]);
     }
-    
+
     free(matrix);
 }
 
 
-void freeMemory(position **memory, int n) {
-    for(int i=0; i<n; i++) {
+void freeMemory(position **memory, int m) {
+    for (int i=0; i<m; i++) {
         free(memory[i]);
     }
     
@@ -28,13 +29,17 @@ void freeMemory(position **memory, int n) {
 int **initMatrix(int m, int n) {
     int** matrix;
     
-    matrix = (int**)malloc(m * sizeof(int*));
-    for (int i = 0; i <=m; i++) {
-        matrix[i] = (int*) malloc(n * sizeof(int));
+    m = m + 1;
+    n = n + 1;
+    
+    matrix = (int**)malloc((m) * sizeof(int*));
+
+    for (int i = 0; i < m; i++) {
+        matrix[i] = (int*) malloc((n * sizeof(int)));
     }
     
-    for (int i=0; i <=m; i++) {
-        for (int j=0; j < n; j++) {
+    for (int i=0; i < m; i++) {
+        for (int j=0; j<n; j++) {
             matrix[i][j] = 0;
         }
     }
@@ -42,13 +47,29 @@ int **initMatrix(int m, int n) {
     return matrix;
 }
 
+position **initMemory(int m, int n) {
+    position** matrix;
+    
+    m = m + 1;
+    n = n + 1;
+    
+    matrix = (position**)malloc((m) * sizeof(position*));
+    
+    for (int i = 0; i <=m; i++) {
+        matrix[i] = (position*) malloc((n * sizeof(position)));
+    }
+    
+    return matrix;
+
+}
+
 position* maximumValue(int **matrix, int m, int n) {
     
     int maxValue = 0;
     position *max = (position *) malloc(sizeof(position));
     
-    for (int i=1; i<=n; i++) {
-        for (int j=1; j<=m; j++) {
+    for (int i=0; i<m; i++) {
+        for (int j=0; j<n; j++) {
             if (matrix[i][j] > maxValue) {
                 maxValue = matrix[i][j];
                 max->i = i;
@@ -58,4 +79,14 @@ position* maximumValue(int **matrix, int m, int n) {
     }
     
     return max;
+}
+
+void printMatrix(int **matrix, int m, int n) {
+    for (int i=0; i<=m; i++) {
+        for (int j=0; j<=n; j++) {
+            printf("%i ", matrix[i][j]);
+        }
+        
+        printf("\n");
+    }
 }
