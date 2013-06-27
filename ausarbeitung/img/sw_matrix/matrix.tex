@@ -1,0 +1,47 @@
+\documentclass{minimal}
+\usepackage{tikz}
+\usetikzlibrary{calc,matrix}
+\usepackage{mathtools}
+\usepackage{amsmath}
+
+\begin{document}
+\begin{center}
+    \[ H(i,j) = max \left \{
+    \begin{array}{lc}
+        H(i-1,j-1) + w(a_i,b_j) \quad & \text{Match/Mismatch} \\
+        H(i-1,j) + w(a_i,-)     \quad & \text{Deletion}       \\
+        H(i,j-1) + w(-,b_j)     \quad & \text{Insertion}      \\
+    \end{array} \right\}, 1 \le i \le m, 1 \le j \le n \]
+
+    \[ w(\text{match}) = +1;\quad  w(a,-) = w(-,b) = w(mismatch) = -1 \]
+\end{center}
+
+\begin{tikzpicture}
+    \matrix [%
+      matrix of math nodes,
+      column sep=1em,
+      row sep=1em
+    ] (sw) {%
+        / & - & A & N & A & N & A & S & S & E \\
+        - & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        B & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        A & 0 &   &   &   &   &   &   &   &   \\
+        N & 0 &   &   &   &   &   &   &   &   \\
+        A & 0 &   &   &   &   &   &   &   &   \\
+        N & 0 &   &   &   &   &   &   &   &   \\
+        E & 0 &   &   &   &   &   &   &   &   \\
+        N & 0 &   &   &   &   &   &   &   &   \\
+    };
+
+    \path
+    (sw-2-3) edge[->] (sw-3-3)
+    (sw-2-4) edge[->] (sw-3-4)
+    (sw-2-5) edge[->] (sw-3-5)
+    (sw-2-6) edge[->] (sw-3-6)
+    (sw-2-7) edge[->] (sw-3-7)
+    (sw-2-8) edge[->] (sw-3-8)
+    (sw-2-9) edge[->] (sw-3-9)
+    (sw-2-10) edge[->] (sw-3-10)
+    ;
+\end{tikzpicture}
+\end{document}
