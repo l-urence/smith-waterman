@@ -13,12 +13,15 @@ int main(int argc, const char *argv[])
 {
     //char *s1 = "ACACACTAAA";
     //char *s2 = "AGCACACAG";
-    char *s1 = "ACACACTAAAGG";
-    char *s2 = "AAAAAAAAAAAAGG";
+    //char *s1 = "ACACACTAAAGG";
+    //char *s2 = "AAAAAAAAAAAAGG";
     //char *s1 = "ATGCAGT";
     //char *s2 = "ATAAGT";
     //char *s1 = "AAAAA";
     //char *s2 = "AAA";
+    char *s1 = "ANANAS";
+    char *s2 = "BANANE";
+    
     
     int m = (int) strlen(s2);
     int n = (int) strlen(s1);
