@@ -9,56 +9,51 @@
 #include "matrix.h"
 
 void freeMatrix(int **matrix, int m) {
-    m = m + 1;
-    for (int i = 0; i < m; i++) {
+    for (int i=0; i <=m; i++)
         free(matrix[i]);
-    }
 
     free(matrix);
 }
 
 void freeMemory(position **memory, int m) {
-    for (int i=0; i<m; i++) {
+    for (int i=0; i<=m; i++)
         free(memory[i]);
-    }
     
     free(memory);
 }
 
 int **initMatrix(int m, int n) {
-    int** matrix;
-    
     m = m + 1;
     n = n + 1;
     
-    matrix = (int**)malloc((m) * sizeof(int*));
+    int **matrix = malloc(sizeof(int*) * m);
 
     for (int i = 0; i < m; i++) {
-        matrix[i] = (int*) malloc((n * sizeof(int)));
+        matrix[i] = malloc((n * sizeof(int)));
     }
     
-    for (int i=0; i < m; i++) {
-        for (int j=0; j<n; j++) {
+    for (int i=0; i < m; i++)
+        for (int j=0; j<n; j++)
             matrix[i][j] = 0;
-        }
-    }
     
     return matrix;
 }
 
 position **initMemory(int m, int n) {
-    position** matrix;
-    
     m = m + 1;
     n = n + 1;
     
-    matrix = (position**)malloc((m) * sizeof(position*));
+    position **memory = malloc(sizeof(position*) * m);
     
-    for (int i = 0; i <=m; i++) {
-        matrix[i] = (position*) malloc((n * sizeof(position)));
-    }
-    
-    return matrix;
+    int i, j;
+    for (i=0; i<m; i++)
+        memory[i] = malloc(sizeof(position) * n);
+        
+    for (i=0; i<m; i++)
+        for (j=0; j<m; j++)
+            memory[i][j] = (position) {0, 0};
+            
+    return memory;
 
 }
 

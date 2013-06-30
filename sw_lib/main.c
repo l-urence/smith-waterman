@@ -27,12 +27,12 @@ int main(int argc, const char *argv[])
     int n = (int) strlen(s1);
 
 
+    //position **memory = initMemory(m, n);
+    //freeMemory(memory, m);
+
     int **matrix = initMatrix(m, n);
-    
     sw(s1, s2, matrix);
-    
     printMatrix(matrix, m, n);
-    
     freeMatrix(matrix, m);
     
     return 0;

@@ -56,22 +56,21 @@ void sw(char *s1, char *s2, int **matrix) {
             int ii = j + 1;
             int jj = slice - j + 1;
             if (ii <= m && jj <= n) {
-                // rprintf("(%i, %i)", ii, jj);
                 findMaximum(matrix, memory, j + 1, jj, s2[ii - 1], s1[jj - 1]);
             }
     	}
-        
-            printf("\n");
     }
     
     // Traceback
-    char stringA[m + n +2], stringB[m + n +2];
+    char stringA[m + n + 2], stringB[m + n + 2];
     
     position *currentPos = maximumValue(matrix, m, n);
     position nextPos = memory[currentPos->i][currentPos->j];
     int index = 0;
     
-    while ((currentPos->i != nextPos.i || currentPos->j != nextPos.j) && nextPos.i >= 0 && nextPos.j >= 0) {
+    while ((currentPos->i != nextPos.i || currentPos->j != nextPos.j) && 
+            nextPos.i >= 0 && nextPos.j >= 0) {
+            
         if (nextPos.i == currentPos->i) {
             stringA[index] = '-';
         } else {
