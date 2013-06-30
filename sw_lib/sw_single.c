@@ -16,6 +16,8 @@ int match(char ai, char bj) {
     }
 }
 
+// Find the maximum value for the current cell looking to the north, west and
+// north-west cells of the current cell.
 void findMaximum(int **matrix, position **memory, int i, int j, char a, char b) {
     int max = 0;
     
@@ -62,25 +64,48 @@ void sw(char *s1, char *s2, int **matrix) {
     }
     
     // Traceback
-    char stringA[m + n + 2], stringB[m + n + 2];
+    swResult *result = traceback(s1, s2, memory, matrix);
     
+    for (int i=result->length-1; i>=0; i--) {
+        printf("%c", result->resultB[i]);
+    }
+    
+    printf("\n");
+    
+    for (int i=result->length-1; i>=0; i--) {
+        printf("%c", result->resultA[i]);
+    }
+    
+    printf("\n");
+    
+    free(result->resultA);
+    free(result->resultB);
+    free(result);
+    freeMemory(memory, m);
+}
+
+
+swResult *traceback(char *s1, char *s2, position **memory, int **matrix) {
+    int m = ((int) strlen(s2));
+    int n = ((int) strlen(s1));
+    char stringA[m + n + 2], stringB[m + n + 2];
     position *currentPos = maximumValue(matrix, m, n);
     position nextPos = memory[currentPos->i][currentPos->j];
-    int index = 0;
+    int length = 0;
     
-    while ((currentPos->i != nextPos.i || currentPos->j != nextPos.j) && 
-            nextPos.i >= 0 && nextPos.j >= 0) {
-            
+    while ((currentPos->i != nextPos.i || currentPos->j != nextPos.j) &&
+           nextPos.i >= 0 && nextPos.j >= 0) {
+        
         if (nextPos.i == currentPos->i) {
-            stringA[index] = '-';
+            stringA[length] = '-';
         } else {
-            stringA[index] = s2[currentPos->i - 1];
+            stringA[length] = s2[currentPos->i - 1];
         }
         
         if (nextPos.j == currentPos->j) {
-            stringB[index] = '-';
+            stringB[length] = '-';
         } else {
-            stringB[index] = s1[currentPos->j  - 1];
+            stringB[length] = s1[currentPos->j  - 1];
         }
         
         *currentPos = nextPos;
@@ -88,23 +113,18 @@ void sw(char *s1, char *s2, int **matrix) {
         if (currentPos->i > 0 && currentPos > 0)
             nextPos = memory[currentPos->i][currentPos->j];
         
-        index++;
+        length++;
     }
-    
-    printf("\n");
-    
-    for (int i=index-1; i>=0; i--) {
-        printf("%c", stringB[i]);
-    }
-    
-    printf("\n");
-    
-    for (int i=index-1; i>=0; i--) {
-        printf("%c", stringA[i]);
-    }
-    
-    printf("\n");
     
     free(currentPos);
-    freeMemory(memory, m);
+
+    // copy results and return them.
+    swResult *result = malloc(sizeof(swResult));
+    result->resultA = malloc(sizeof(char) * length);
+    result->resultB = malloc(sizeof(char) * length);
+    strcpy(result->resultA, stringA);
+    strcpy(result->resultB, stringB);
+    result->length = length;
+    
+    return result;
 }
