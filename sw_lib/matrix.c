@@ -17,7 +17,6 @@ void freeMatrix(int **matrix, int m) {
     free(matrix);
 }
 
-
 void freeMemory(position **memory, int m) {
     for (int i=0; i<m; i++) {
         free(memory[i]);
