@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Hochschule fuer Technik und Wirtschaft. All rights reserved.
 //
 
-#ifndef test_sw_sw_single_h
-#define test_sw_sw_single_h
+#ifndef dna_sw_sw_single_h
+#define dna_sw_sw_single_h
 
 #include <stdio.h>
 #include "matrix.h"

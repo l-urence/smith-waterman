@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Hochschule fuer Technik und Wirtschaft. All rights reserved.
 //
 
-#ifndef test_sw_file_h
-#define test_sw_file_h
+#ifndef dna_sw_file_h
+#define dna_sw_file_h
 
 #include <stdio.h>
 #include <stdlib.h>
