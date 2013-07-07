@@ -27,5 +27,6 @@ void sw(char *s1, char *s2);
 int match(char ai, char bj);
 void findMaximum(int **matrix, position **memory, int i, int j, char a, char b);
 swResult *traceback(char *s1, char *s2, position **memory, int **matrix);
+void evaluateDiagonal(char *s1, char *s2, int z, int slice, int m, int n, int **matrix, position **memory);
 
 #endif
