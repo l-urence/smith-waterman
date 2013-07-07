@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Hochschule fuer Technik und Wirtschaft. All rights reserved.
 //
 
-#include "sw_single.h"
+#include "sw_serial.h"
 
 int match(char ai, char bj) {
     if (ai == bj) {
@@ -46,19 +46,20 @@ void findMaximum(int **matrix, position **memory, int i, int j, char a, char b) 
     matrix[i][j] = max;
 }
 
-void sw(char *s1, char *s2, int **matrix) {
+void sw(char *s1, char *s2) {
     int m = ((int) strlen(s2));
     int n = ((int) strlen(s1));
     int max = m < n ? n : m;
+    int **matrix = initMatrix(m, n);
     position **memory = initMemory(m, n);
     
-    for (int slice = 0; slice < 2 * max - 1; ++slice) {
-    	int z = slice < max ? 0 : slice - max + 1;
+    for (int slice = 0; slice < 2 * max; ++slice) {
+    	int z = slice <= max? 0 : slice - max + 1;
     	for (int j = z; j <= slice - z; ++j) {
             int ii = j + 1;
             int jj = slice - j + 1;
             if (ii <= m && jj <= n) {
-                findMaximum(matrix, memory, j + 1, jj, s2[ii - 1], s1[jj - 1]);
+                findMaximum(matrix, memory, ii, jj, s2[ii - 1], s1[jj - 1]);
             }
     	}
     }
@@ -82,12 +83,13 @@ void sw(char *s1, char *s2, int **matrix) {
     free(result->resultB);
     free(result);
     freeMemory(memory, m);
+    freeMatrix(matrix, n);
 }
 
 
 swResult *traceback(char *s1, char *s2, position **memory, int **matrix) {
-    int m = ((int) strlen(s2));
-    int n = ((int) strlen(s1));
+    int m = ((int) strlen(s2)) + 1;
+    int n = ((int) strlen(s1)) + 1;
     char stringA[m + n + 2], stringB[m + n + 2];
     position *currentPos = maximumValue(matrix, m, n);
     position nextPos = memory[currentPos->i][currentPos->j];

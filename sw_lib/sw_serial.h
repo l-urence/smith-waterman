@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Hochschule fuer Technik und Wirtschaft. All rights reserved.
 //
 
-#ifndef dna_sw_sw_single_h
-#define dna_sw_sw_single_h
+#ifndef dna_sw_serial_h
+#define dna_sw_serial_h
 
 #include <stdio.h>
 #include "matrix.h"
@@ -22,7 +22,8 @@ typedef struct swResult {
     int length;
 } swResult;
 
-void sw(char *s1, char *s2, int **matrix);
+
+void sw(char *s1, char *s2);
 int match(char ai, char bj);
 void findMaximum(int **matrix, position **memory, int i, int j, char a, char b);
 swResult *traceback(char *s1, char *s2, position **memory, int **matrix);

@@ -6,8 +6,11 @@
 //  Copyright (c) 2013 Hochschule fuer Technik und Wirtschaft. All rights reserved.
 //
 
-#include <stdio.h>
+// #include <stdio.h>
 #include "sw_serial.h"
+#include "sw_file.h"
+
+
 
 int main(int argc, const char *argv[])
 {
@@ -17,23 +20,16 @@ int main(int argc, const char *argv[])
     //char *s2 = "AAAAAAAAAAAAGG";
     //char *s1 = "ATGCAGT";
     //char *s2 = "ATAAGT";
-    //char *s1 = "AAAAA";
-    //char *s2 = "AAA";
+    //char *s1 = "AAA";
+    //char *s2 = "AAABA";
+    //char *s1 = "ANANASDDDEEEEEEEEEEEEEE";
+    //char *s2 = "BANANEXXXEEEEEEEEEEEEEE";
+    //char *s1 = "ACACACTA";
+    //char *s2 = "AGCACACA";
     char *s1 = "ANANAS";
     char *s2 = "BANANE";
-    
-    
-    int m = (int) strlen(s2);
-    int n = (int) strlen(s1);
 
-
-    //position **memory = initMemory(m, n);
-    //freeMemory(memory, m);
-
-    int **matrix = initMatrix(m, n);
-    sw(s1, s2, matrix);
-    printMatrix(matrix, m, n);
-    freeMatrix(matrix, m);
+    sw(s1, s2);
     
     return 0;
 }
