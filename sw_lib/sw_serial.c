@@ -51,17 +51,20 @@ void findMaximum(int **matrix, int **memory, int i, int j, char a, char b) {
 }
 
 void sw(char *s1, char *s2) {
-    int m = ((int) strlen(s2));
-    int n = ((int) strlen(s1));
-    int max = m < n ? n : m;
+    const int m = ((int) strlen(s2));
+    const int n = ((int) strlen(s1));
+    const int max = m < n ? n : m;
     int **matrix = initMatrix(m, n);
     int **memory = initMatrix(m, n);
     
     for (int slice = 0; slice < 2 * max; ++slice) {
-        int z = slice <= max? 0 : slice - max + 1;
+        const int z = slice <= max? 0 : slice - max + 1;
         evaluateDiagonal(s1, s2, z, slice, m, n, matrix, memory);
     }
+    
     printMatrix(matrix, m, n);
+    printf("\n");
+    printMatrix(memory, m, n);
     
     // Traceback
     swResult *result = traceback(s1, s2, memory, matrix);
@@ -101,33 +104,31 @@ swResult *traceback(char *s1, char *s2, int **memory, int **matrix) {
     char stringA[m + n + 2], stringB[m + n + 2];
     position currentPos = maximumValue(matrix, m, n);
     position nextPos = getNextPosition(currentPos.i, currentPos.j, memory);
+    int length = 0;
     
-    /*int length = 0;
-    
-    while ((currentPos->i != nextPos.i || currentPos->j != nextPos.j) &&
+    while ((currentPos.i != nextPos.i || currentPos.j != nextPos.j) &&
            nextPos.i >= 0 && nextPos.j >= 0) {
         
-        if (nextPos.i == currentPos->i) {
+        if (nextPos.i == currentPos.i) {
             stringA[length] = '-';
         } else {
-            stringA[length] = s2[currentPos->i - 1];
+            stringA[length] = s2[currentPos.i - 1];
         }
         
-        if (nextPos.j == currentPos->j) {
+        if (nextPos.j == currentPos.j) {
             stringB[length] = '-';
         } else {
-            stringB[length] = s1[currentPos->j  - 1];
+            stringB[length] = s1[currentPos.j  - 1];
         }
         
-        *currentPos = nextPos;
+        currentPos = nextPos;
         
-        if (currentPos->i > 0 && currentPos > 0)
-            nextPos = memory[currentPos->i][currentPos->j];
+        if (currentPos.i > 0 && currentPos.j > 0) {
+            nextPos = getNextPosition(currentPos.i, currentPos.j, memory);
+        }
         
         length++;
     }
-    
-    free(currentPos);
 
     // copy results and return them.
     swResult *result = malloc(sizeof(swResult));
@@ -135,9 +136,9 @@ swResult *traceback(char *s1, char *s2, int **memory, int **matrix) {
     result->resultB = malloc(sizeof(char) * length);
     strcpy(result->resultA, stringA);
     strcpy(result->resultB, stringB);
-    result->length = length;*/
+    result->length = length;
     
-    return NULL;//result;
+    return result;
 }
 
 position getNextPosition(int i, int j, int **memory) {
