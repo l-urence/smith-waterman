@@ -53,13 +53,13 @@ void findMaximum(int **matrix, int **memory, int i, int j, char a, char b) {
 void sw(char *s1, char *s2) {
     int m = ((int) strlen(s2));
     int n = ((int) strlen(s1));
-    int max = m > n ? n : m;
+    int max = m < n ? n : m;
     int **matrix = initMatrix(m, n);
     int **memory = initMatrix(m, n);
     
     for (int slice = 0; slice < 2 * max; ++slice) {
-    	int z = slice <= max? 0 : slice - max + 1;
-    	evaluateDiagonal(s1, s2, z, slice, m, n, matrix, memory);
+        int z = slice <= max? 0 : slice - max + 1;
+        evaluateDiagonal(s1, s2, z, slice, m, n, matrix, memory);
     }
     printMatrix(matrix, m, n);
     
