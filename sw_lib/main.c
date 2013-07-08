@@ -26,8 +26,8 @@ int main(int argc, const char *argv[])
     //char *s2 = "BANANEXXXEEEEEEEEEEEEEE";
     //char *s1 = "ACACACTA";
     //char *s2 = "AGCACACA";
-    char *s1 = "ANANAS";
-    char *s2 = "BANANE";
+    char *s1 = "ANANASS";
+    char *s2 = "BANANESS";
 
     sw(s1, s2);
     

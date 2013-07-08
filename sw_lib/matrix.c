@@ -15,13 +15,6 @@ void freeMatrix(int **matrix, int m) {
     free(matrix);
 }
 
-void freeMemory(position **memory, int m) {
-    for (int i=0; i<=m; i++)
-        free(memory[i]);
-    
-    free(memory);
-}
-
 int **initMatrix(int m, int n) {
     m = m + 1;
     n = n + 1;
@@ -39,35 +32,17 @@ int **initMatrix(int m, int n) {
     return matrix;
 }
 
-position **initMemory(int m, int n) {
-    m = m + 1;
-    n = n + 1;
-    
-    position **memory = malloc(sizeof(position*) * m);
-    
-    int i, j;
-    for (i=0; i<m; i++)
-        memory[i] = malloc(sizeof(position) * n);
-        
-    for (i=0; i<m; i++)
-        for (j=0; j<m; j++)
-            memory[i][j] = (position) {0, 0};
-            
-    return memory;
-
-}
-
-position* maximumValue(int **matrix, int m, int n) {
+position maximumValue(int **matrix, int m, int n) {
     
     int maxValue = 0;
-    position *max = (position *) malloc(sizeof(position));
+    position max;
     
     for (int i=0; i<m; i++) {
         for (int j=0; j<n; j++) {
             if (matrix[i][j] > maxValue) {
                 maxValue = matrix[i][j];
-                max->i = i;
-                max->j = j;
+                max.i = i;
+                max.j = j;
             }
         }
     }

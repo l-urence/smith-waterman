@@ -18,29 +18,33 @@ int match(char ai, char bj) {
 
 // Find the maximum value for the current cell looking to the north, west and
 // north-west cells of the current cell.
-void findMaximum(int **matrix, position **memory, int i, int j, char a, char b) {
+void findMaximum(int **matrix, int **memory, int i, int j, char a, char b) {
     int max = 0;
     
     int mm = matrix[i-1][j-1] + match(a, b);
     if (mm > max) {
         max = mm;
-        memory[i][j] = (position) {i - 1, j - 1};
+        memory[i][j] = NORTH_WEST;
+        // memory[i][j] = (position) {i - 1, j - 1};
     }
     
     int md = matrix[i-1][j] + GAP;
     if (md > max) {
         max = md;
-        memory[i][j] = (position) {i - 1, j};
+        memory[i][j] = NORTH;
+        // memory[i][j] = (position) {i - 1, j};
     }
     
     int mi = matrix[i][j-1] + GAP;
     if (mi > max) {
         max = mi;
-        memory[i][j] = (position) {i, j - 1};
+        memory[i][j] = WEST;
+        // memory[i][j] = (position) {i, j - 1};
     }
     
     if (max == 0) {
-        memory[i][j] = (position) {i, j};
+        memory[i][j] = CENTER;
+        // memory[i][j] = (position) {i, j};
     }
     
     matrix[i][j] = max;
@@ -49,14 +53,15 @@ void findMaximum(int **matrix, position **memory, int i, int j, char a, char b) 
 void sw(char *s1, char *s2) {
     int m = ((int) strlen(s2));
     int n = ((int) strlen(s1));
-    int max = m < n ? n : m;
+    int max = m > n ? n : m;
     int **matrix = initMatrix(m, n);
-    position **memory = initMemory(m, n);
+    int **memory = initMatrix(m, n);
     
     for (int slice = 0; slice < 2 * max; ++slice) {
     	int z = slice <= max? 0 : slice - max + 1;
     	evaluateDiagonal(s1, s2, z, slice, m, n, matrix, memory);
     }
+    printMatrix(matrix, m, n);
     
     // Traceback
     swResult *result = traceback(s1, s2, memory, matrix);
@@ -76,11 +81,11 @@ void sw(char *s1, char *s2) {
     free(result->resultA);
     free(result->resultB);
     free(result);
-    freeMemory(memory, m);
+    freeMatrix(memory, m);
     freeMatrix(matrix, n);
 }
 
-void evaluateDiagonal(char *s1, char *s2, int z, int slice, int m, int n, int **matrix, position **memory) {
+void evaluateDiagonal(char *s1, char *s2, int z, int slice, int m, int n, int **matrix, int **memory) {
     for (int j = z; j <= slice - z; ++j) {
         int ii = j + 1;
         int jj = slice - j + 1;
@@ -90,13 +95,14 @@ void evaluateDiagonal(char *s1, char *s2, int z, int slice, int m, int n, int **
     }
 }
 
-swResult *traceback(char *s1, char *s2, position **memory, int **matrix) {
-    int m = ((int) strlen(s2)) + 1;
-    int n = ((int) strlen(s1)) + 1;
+swResult *traceback(char *s1, char *s2, int **memory, int **matrix) {
+    const int m = ((int) strlen(s2)) + 1;
+    const int n = ((int) strlen(s1)) + 1;
     char stringA[m + n + 2], stringB[m + n + 2];
-    position *currentPos = maximumValue(matrix, m, n);
-    position nextPos = memory[currentPos->i][currentPos->j];
-    int length = 0;
+    position currentPos = maximumValue(matrix, m, n);
+    position nextPos = getNextPosition(currentPos.i, currentPos.j, memory);
+    
+    /*int length = 0;
     
     while ((currentPos->i != nextPos.i || currentPos->j != nextPos.j) &&
            nextPos.i >= 0 && nextPos.j >= 0) {
@@ -129,7 +135,29 @@ swResult *traceback(char *s1, char *s2, position **memory, int **matrix) {
     result->resultB = malloc(sizeof(char) * length);
     strcpy(result->resultA, stringA);
     strcpy(result->resultB, stringB);
-    result->length = length;
+    result->length = length;*/
     
-    return result;
+    return NULL;//result;
+}
+
+position getNextPosition(int i, int j, int **memory) {
+    const int direction = memory[i][j];
+
+    if (direction == NORTH_WEST) {
+        return (position) {i-1, j-1};
+    }
+    
+    if (direction == NORTH) {
+        return (position) {i-1, j};
+    }
+    
+    if (direction == WEST) {
+        return (position) {i, j-1};
+    }
+    
+    if (direction == CENTER) {
+        return (position) {i, j};
+    }
+    
+    return (position) {-1, -1};
 }
