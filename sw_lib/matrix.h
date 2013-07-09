@@ -23,6 +23,8 @@ typedef struct position
 int **initMatrix(int m, int n);
 void freeMatrix(int **matrix, int n);
 position maximumValue(int **matrix, int m, int n);
+void copyMatrix(int **source, int **target, int i, int j, int max);
+void mergeMatrix(int **source, int **target, int i, int j, int max);
 void printMatrix(int **matrix, int m, int n);
 
 

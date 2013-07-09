@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "matrix.h"
+#include <math.h>
 
 #define MATCH 2
 #define MISS_MATCH -1
@@ -30,11 +31,11 @@ enum direction {
 };
 
 
-void sw(char *s1, char *s2);
+void sw(const char *s1, const char *s2, int dim);
 int match(char ai, char bj);
 void findMaximum(int **matrix, int **memory, int i, int j, char a, char b);
-swResult *traceback(char *s1, char *s2, int **memory, int **matrix);
-void evaluateDiagonal(char *s1, char *s2, int z, int slice, int m, int n, int **matrix, int **memory);
+swResult *traceback(const char *s1, const char *s2, int **memory, int **matrix);
+int getDiagonalLength(int slice, int z, int m, int n);
 position getNextPosition(int i, int j, int **memory);
 
 #endif

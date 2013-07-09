@@ -50,23 +50,50 @@ void findMaximum(int **matrix, int **memory, int i, int j, char a, char b) {
     matrix[i][j] = max;
 }
 
-void sw(char *s1, char *s2) {
+void sw(const char *s1, const char *s2, const int dim) {
+    
     const int m = ((int) strlen(s2));
     const int n = ((int) strlen(s1));
-    const int max = m < n ? n : m;
     int **matrix = initMatrix(m, n);
     int **memory = initMatrix(m, n);
     
-    for (int slice = 0; slice < 2 * max; ++slice) {
-        const int z = slice <= max? 0 : slice - max + 1;
-        evaluateDiagonal(s1, s2, z, slice, m, n, matrix, memory);
+    if (m % dim != 0 && n % dim != 0) return;
+    
+    int max = n / dim;
+    
+    for (int slice = 0; slice < 2 * max - 1; ++slice) {
+    	int z = slice < max ? 0 : slice - max + 1;
+    	
+        
+        for (int j = z; j <= slice - z; ++j) {
+            printf("(%i, %i)\n", j*dim, (slice -j)*dim);
+            
+            int **tmpMatrix = initMatrix(dim, dim);
+            int **tmpMemory = initMatrix(dim, dim);
+            
+            copyMatrix(matrix, tmpMatrix, j*dim, (slice -j)*dim, dim);
+            printMatrix(tmpMatrix, dim, dim);
+            
+            for (int ii=1; ii <= dim; ii++) {
+                for(int jj=1; jj <= dim; jj++) {
+                    findMaximum(tmpMatrix, tmpMemory, ii, jj, s1[jj - 1 + ((slice -j)*dim)], s2[ii -1 + (j*dim)]);
+                }
+            }
+            
+            mergeMatrix(tmpMatrix, matrix, j*dim, (slice - j)*dim, dim);
+            mergeMatrix(tmpMemory, memory, j*dim, (slice - j)*dim, dim);
+
+            printMatrix(tmpMatrix, dim, dim);
+            printMatrix(matrix, m, m);
+            
+            
+            freeMatrix(tmpMatrix, dim);
+    	}
+        
+        
+    	printf("\n");
     }
     
-    printMatrix(matrix, m, n);
-    printf("\n");
-    printMatrix(memory, m, n);
-    
-    // Traceback
     swResult *result = traceback(s1, s2, memory, matrix);
     
     for (int i=result->length-1; i>=0; i--) {
@@ -85,27 +112,32 @@ void sw(char *s1, char *s2) {
     free(result->resultB);
     free(result);
     freeMatrix(memory, m);
-    freeMatrix(matrix, n);
+    freeMatrix(matrix, m);
 }
 
-void evaluateDiagonal(char *s1, char *s2, int z, int slice, int m, int n, int **matrix, int **memory) {
-    for (int j = z; j <= slice - z; ++j) {
-        int ii = j + 1;
-        int jj = slice - j + 1;
-        if (ii <= m && jj <= n) {
-            findMaximum(matrix, memory, ii, jj, s2[ii - 1], s1[jj - 1]);
-        }
+int getDiagonalLength(int slice, int z, int m, int n) {
+    int i = z;
+    int j = slice - z;
+    
+    if (slice <= m - 1) {
+        return  j + 1;
     }
+    
+    if (z < n && slice > m - 1) {
+        return  j - i + 1;
+    }
+    
+    return 0;
 }
 
-swResult *traceback(char *s1, char *s2, int **memory, int **matrix) {
+swResult *traceback(const char *s1, const char *s2, int **memory, int **matrix) {
     const int m = ((int) strlen(s2)) + 1;
     const int n = ((int) strlen(s1)) + 1;
-    char stringA[m + n + 2], stringB[m + n + 2];
+    char stringA[m + n], stringB[m + n];
     position currentPos = maximumValue(matrix, m, n);
     position nextPos = getNextPosition(currentPos.i, currentPos.j, memory);
     int length = 0;
-    
+
     while ((currentPos.i != nextPos.i || currentPos.j != nextPos.j) &&
            nextPos.i >= 0 && nextPos.j >= 0) {
         

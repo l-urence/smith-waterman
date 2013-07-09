@@ -64,7 +64,7 @@ void SwSingle::calculateAlignments() {
     int tick = 0;
     char consensus_a[seqALength + seqBLength + 2], consensus_b[seqBLength + seqALength + 2];
 
-    while(((current_i!=next_i) || (current_j!=next_j)) && (next_j!=0) && (next_i!=0)) {
+    while(((current_i!=next_i) || (current_j!=next_j)) && (next_j >= 0) && (next_i >=0)) {
 
         if (next_i == current_i) {
             // deletion in A
@@ -83,8 +83,11 @@ void SwSingle::calculateAlignments() {
         }
         current_i = next_i;
         current_j = next_j;
-        next_i = I_i[current_i][current_j];
-        next_j = I_j[current_i][current_j];
+        if (current_i > 0 && current_j > 0) {
+            next_i = I_i[current_i][current_j];
+            next_j = I_j[current_i][current_j];
+        }
+
         tick++;
     }
 

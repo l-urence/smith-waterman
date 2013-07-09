@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 
     
     SwSingle *swSingle = new SwSingle();
-    swSingle->setSequences("BANANE", "SANANA");
+    swSingle->setSequences("ANANAS", "BANANE");
     swSingle->calculateAlignments();
     
    /* for(unsigned int i=0; i<sequenceVectorA.size(); i++){

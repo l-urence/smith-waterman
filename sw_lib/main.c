@@ -29,7 +29,7 @@ int main(int argc, const char *argv[])
     char *s1 = "ANANAS";
     char *s2 = "BANANE";
 
-    sw(s1, s2);
+    sw(s1, s2, 2);
     
     return 0;
 }
