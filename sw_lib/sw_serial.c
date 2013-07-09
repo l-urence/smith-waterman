@@ -25,26 +25,22 @@ void findMaximum(int **matrix, int **memory, int i, int j, char a, char b) {
     if (mm > max) {
         max = mm;
         memory[i][j] = NORTH_WEST;
-        // memory[i][j] = (position) {i - 1, j - 1};
     }
     
     int md = matrix[i-1][j] + GAP;
     if (md > max) {
         max = md;
         memory[i][j] = NORTH;
-        // memory[i][j] = (position) {i - 1, j};
     }
     
     int mi = matrix[i][j-1] + GAP;
     if (mi > max) {
         max = mi;
         memory[i][j] = WEST;
-        // memory[i][j] = (position) {i, j - 1};
     }
     
     if (max == 0) {
         memory[i][j] = CENTER;
-        // memory[i][j] = (position) {i, j};
     }
     
     matrix[i][j] = max;
@@ -89,6 +85,7 @@ void sw(const char *s1, const char *s2, const int dim) {
             mergeMatrix(tmpMemory, memory, j*dim, (slice - j)*dim, dim);
             
             freeMatrix(tmpMatrix, dim);
+            freeMatrix(tmpMemory, dim);
     	}
         
         
