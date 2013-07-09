@@ -13,10 +13,14 @@
 
 #ifdef __APPLE__
 #include "OpenCL/opencl.h"
+#include "kernel.cl.h"
 #else
 #include "CL/cl.h"
 #endif
 
-void getContext();
+#define NUM_VALUES 3
+
+void compute(int ***matrix, int ***mem, int length, int dim);
+
 
 #endif

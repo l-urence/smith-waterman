@@ -50,6 +50,14 @@ void findMaximum(int **matrix, int **memory, int i, int j, char a, char b) {
     matrix[i][j] = max;
 }
 
+void serialHost(int ***matrixContainer, int ***memContainer, int dim) {
+    
+}
+
+void serialKernel() {
+    
+}
+
 void sw(const char *s1, const char *s2, const int dim) {
     
     const int m = ((int) strlen(s2));
@@ -64,28 +72,21 @@ void sw(const char *s1, const char *s2, const int dim) {
     for (int slice = 0; slice < 2 * max - 1; ++slice) {
     	int z = slice < max ? 0 : slice - max + 1;
     	
-        
         for (int j = z; j <= slice - z; ++j) {
-            printf("(%i, %i)\n", j*dim, (slice -j)*dim);
-            
             int **tmpMatrix = initMatrix(dim, dim);
             int **tmpMemory = initMatrix(dim, dim);
-            
+            int **matrixContainer[1] = {tmpMatrix};
+
             copyMatrix(matrix, tmpMatrix, j*dim, (slice -j)*dim, dim);
-            printMatrix(tmpMatrix, dim, dim);
             
             for (int ii=1; ii <= dim; ii++) {
                 for(int jj=1; jj <= dim; jj++) {
-                    findMaximum(tmpMatrix, tmpMemory, ii, jj, s1[jj - 1 + ((slice -j)*dim)], s2[ii -1 + (j*dim)]);
+                    findMaximum(matrixContainer[0], tmpMemory, ii, jj, s1[jj - 1 + ((slice -j)*dim)], s2[ii -1 + (j*dim)]);
                 }
             }
             
             mergeMatrix(tmpMatrix, matrix, j*dim, (slice - j)*dim, dim);
             mergeMatrix(tmpMemory, memory, j*dim, (slice - j)*dim, dim);
-
-            printMatrix(tmpMatrix, dim, dim);
-            printMatrix(matrix, m, m);
-            
             
             freeMatrix(tmpMatrix, dim);
     	}
