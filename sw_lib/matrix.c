@@ -50,24 +50,6 @@ position maximumValue(int **matrix, int m, int n) {
     return max;
 }
 
-void copyMatrix(int **source, int **target, int i, int j, int max) {
-    for (int ii = i; ii <= max + i; ++ii) {
-        target[ii - i][0] = source[ii][j];
-    }
-    
-    for (int jj = j; jj <= max + j; ++jj) {
-        target[0][jj - j] = source[i][jj];
-    }
-}
-
-void mergeMatrix(int **source, int **target, int i, int j, int max) {
-    for (int ii = i+1; ii <= max + i; ++ii) {
-        for (int jj = j+1; jj <= max + j; ++jj) {
-            target[ii][jj] = source[ii - i][jj -j];
-        }
-    }
-}
-
 void printMatrix(int **matrix, int m, int n) {
     for (int i=0; i<=m; i++) {
         for (int j=0; j<=n; j++) {

@@ -25,14 +25,14 @@ int main(int argc, const char *argv[])
     //char *s2 = "AAABA";
     //char *s1 = "ANANASDDDEEEEEEEEEEEEEE";
     //char *s2 = "BANANEXXXEEEEEEEEEEEEEE";
-    //char *s1 = "ACACACTA";
-    //char *s2 = "AGCACACA";
+    char *s1 = "ACACACTA";
+    char *s2 = "AGCACACA";
     //char *s1 = "ANANAS";
     //char *s2 = "BANANE";
 
-    // sw(s1, s2, 2);
+    sw(s1, s2, 2);
     
-    compute(NULL, NULL, 0, 0);
+    //compute(NULL, NULL, 0, 0);
     
     return 0;
 }

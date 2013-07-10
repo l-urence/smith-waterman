@@ -31,7 +31,7 @@ enum direction {
 };
 
 
-void sw(const char *s1, const char *s2, int dim);
+void sw(const char *s1, const char *s2, int sub);
 int match(char ai, char bj);
 void findMaximum(int **matrix, int **memory, int i, int j, char a, char b);
 swResult *traceback(const char *s1, const char *s2, int **memory, int **matrix);
