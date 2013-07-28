@@ -1,40 +1,22 @@
 # Einleitung
-In der Bioinformatik stellt die Ermittlung von Ähnlichkeitsmaßen eine wichtige Rolle ...
+Seit einigen Jahren steigt die Taktfrequenz von Prozessoren (CPU) nicht weiter an, dies ist durch die hohe Wärmeabgabe bei hohen Taktfrequenzen des Prozessors bedingt. Die Entwicklung vom Mehrkernprozessoren erlaubt es durch Parallelisierung dies teilweise zu kompensieren. Mittlerweile ist nicht nur die Parallelisierung auf herkömmlichen CPUs von Bedeutung. Die rasante Entwicklung von Grafikarten-Prozessoren (GPU) macht diese für parallele Ausführung von Programmen immer interessanter. Verantwortlich ist die wesentlich höhere Anzahl an Prozessorkernen einer GPU im vergleich zu einer herkömmlichen CPU. Auch die die schneller ansteigende Leistung im Bezug auf CPUs lassen der Grafikkarte für Parallelisierung mehr Bedeutung zukommen.
 
-Ziel dieser Arbeit ist ...
+Diese Arbeit befasst sich mit der Parallelisierung eines Algorithmus für Sequenz Aligments in Zeichenketten. Verwendung finden Algorithmen zur Bestimmung von Aligments zum Großenteil in der Bioinformatik, um besipelsweise DNA-Sequenzen zu analysieren. Diese Arbeit betrachtet den Smith-Waterman Algorithmus, welcher das optimale alignment zweier Zeichenketten A und B ermittelt. Das verwendete Framework für die Parallelisierung auf der GPU ist OpenCL. Die Open Computing Language (OpenCL) ist ein plattformübergreifender Standart zum Ausführen von parallelen Anwendungen auf Mehrkern CPUs und GPUs. Ziel dieser Arbeite ist es die Nebenläufigkeit des Smith-Waterman Algorithmus zu identifizieren und diesen mittels OpenCL auf der GPU zu parallelisieren. Vergleiche zwischen der seriellen und parallelen Version des Algorithmus geben Aufschluss darüber, ob eine effektive Parallelisierung des finden von optimalen Aligments in Zeichenketten  möglich ist.
 
-# Grundlagen
-## Alignment
-Ein Alignment ist ein Paar aus zwei gegebenen Sequenzen.
+# Smith Waterman
 
-## OpenMP
-Mit Hilfe von OpenMP können parallelisierte Anwendungen bequem ohne externe Bibliotheken realisiert werden. OpenMP ist Bestandteil von gcc.
+## Serieller - Ansatzt
 
-## OpenCL
-OpenCL (Abk. Open Computing Language) ist eine von Apple im Jahr 2008 entwickelte frei verfügbare Bibliothek zur Entwicklung von parallelisierten Anwendungen. Ein OpenCL System besteht aus einem Host und mehreren Geräten. 
+## Paralleler - Ansatz mittels OpenCL
 
-.... SIEHE WIKI und NVIDIA FOLIEN...
+# DNA - Alignment
 
-Die Rechenoperationen können parallel von der CPU oder der weitaus performanten GPU erfolgen. Die Bibliothek stellt alle notwendigen Schnittstellen zur Verfügung.
- 
 ## DNA
-Text
 
-## Smith-Waterman
-Der Smith-Waterman Algorithmus dient zur Ermittlung von lokalen Alignments zweier Sequenzen. Das Ziel ist es, die Teilsequenzen mit der größten Übereinstimmung zwischen zwei gegebenen Sequenzen zu finden. Dazu wird aus beiden Sequenzen eine Bewertungsmatrix gebildet, mit deren Hilfe es möglich ist Übereinstimmungen und Unterschiede in den Sequenzen festzustellen.
-Bei Übereinstimmung (match) einzelner Sequenzelemente wird die Position in der Matrix mit +2 bewertet. Unterschiede (mismatches) und Lücken (gaps) werden mit -1 bewertet. Der niedrigste Wert einer Bewertung beträgt 0. Nach dem Bewerten aller Sequenzelemente in der Matrix wird rückwärts von unten rechts vom höchsten Bewertungswert diagonal zum nächst tieferen Wert hochgegangen bis zum Wert 1. Sind mehere gleichhohe Bewertungswerte vorhanden, so muss dieser Vorgang bei diesen auch wiederholt werden und es gibt mehr als eine gemeinsame Teilsequenz. \cite{sw:algorithmus}
+## Aligments in der DNA
 
-## Initialisierung
-Zu Beginn wird die erste gegebene Sequenz .... \cite{sw:berechnung}
+# Ergebnisse
 
-# Implementierung
-
-## Single
-
-## Parallelisiert (opencl)
-
-# Auswertung
-
-# Fazit
+# Zusammenfassung
 
 # Ausblick

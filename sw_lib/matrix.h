@@ -20,10 +20,10 @@ typedef struct position
 } position;
 
 
-int **initMatrix(int m, int n);
-void freeMatrix(int **matrix, int n);
-position maximumValue(int **matrix, int m, int n);
-void printMatrix(int **matrix, int m, int n);
+int *initMatrix(int dim);
+void freeMatrix(int *matrix);
+position maximumValue(int *matrix, int dim);
+void printMatrix(int *matrix, int dim);
 
 
 #endif

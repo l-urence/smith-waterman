@@ -8,39 +8,31 @@
 
 #include "matrix.h"
 
-void freeMatrix(int **matrix, int m) {
-    for (int i=0; i <=m; i++)
-        free(matrix[i]);
-
+void freeMatrix(int *matrix) {
     free(matrix);
 }
 
-int **initMatrix(int m, int n) {
-    m = m + 1;
-    n = n + 1;
+int *initMatrix(int dim) {
+    dim = dim + 1;
     
-    int **matrix = malloc(sizeof(int*) * m);
+    int *matrix = malloc(sizeof(int) * dim * dim);
 
-    for (int i = 0; i < m; i++) {
-        matrix[i] = malloc((n * sizeof(int)));
-    }
-    
-    for (int i=0; i < m; i++)
-        for (int j=0; j<n; j++)
-            matrix[i][j] = 0;
+    for (int i=0; i < dim; i++)
+        for (int j=0; j < dim; j++)
+            matrix[j+i*dim] = 0;
     
     return matrix;
 }
 
-position maximumValue(int **matrix, int m, int n) {
+position maximumValue(int *matrix, int dim) {
     
     int maxValue = 0;
     position max;
     
-    for (int i=0; i<m; i++) {
-        for (int j=0; j<n; j++) {
-            if (matrix[i][j] > maxValue) {
-                maxValue = matrix[i][j];
+    for (int i=0; i<dim; i++) {
+        for (int j=0; j<dim; j++) {
+            if (matrix[j+i*dim] > maxValue) {
+                maxValue = matrix[j+i*dim];
                 max.i = i;
                 max.j = j;
             }
@@ -50,10 +42,10 @@ position maximumValue(int **matrix, int m, int n) {
     return max;
 }
 
-void printMatrix(int **matrix, int m, int n) {
-    for (int i=0; i<=m; i++) {
-        for (int j=0; j<=n; j++) {
-            printf("%i ", matrix[i][j]);
+void printMatrix(int *matrix, int dim) {
+    for (int i=0; i<dim; i++) {
+        for (int j=0; j<dim; j++) {
+            printf("%i ", matrix[j+i*dim]);
         }
         
         printf("\n");
