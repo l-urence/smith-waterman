@@ -46,9 +46,10 @@ void findMaximum(int *matrix, int *memory, int i, int j, char a, char b, int dim
     matrix[j+i*dim] = max;
 }
 
-void test(int *matrix, int *memory, int i, int j, const char *s1, const char *s2, int sub, int dim) {
-    for (int ii = i; ii < sub + i; ++ii) {
-        for (int jj = j; jj < sub + j; ++jj)
+void test(int *matrix, int *memory, int i, int j, const char *s1, const char *s2, int sub, int dim) {   
+    int ii, jj;
+    for (ii = i; ii < sub + i; ++ii) {
+        for (jj = j; jj < sub + j; ++jj)
             findMaximum(matrix, memory, ii+1, jj+1, s1[jj], s2[ii], dim);
     }
 }
@@ -59,32 +60,34 @@ void sw(const char *s1, const char *s2, const int sub) {
     int *matrix = initMatrix(m);
     int *memory = initMatrix(m);
     int dim = m + 1;
-    
+
     if (m % sub != 0 && n % sub != 0) return;
-    
+
     int max = n / sub;
-    
-    for (int slice = 0; slice < 2 * max - 1; ++slice) {
+
+    int slice, j;
+    for (slice = 0; slice < 2 * max - 1; ++slice) {
     	int z = slice < max ? 0 : slice - max + 1;
-        for (int j = z; j <= slice - z; ++j) {
+        for (j = z; j <= slice - z; ++j) {
             test(matrix, memory, j*sub, (slice - j)*sub, s1, s2, sub, dim);
         }
     }
-    
+
     swResult *result = traceback(s1, s2, memory, matrix);
-    
-    for (int i=result->length-1; i>=0; i--) {
+
+    int i;
+    for (i=result->length-1; i>=0; i--) {
         printf("%c", result->resultB[i]);
     }
-    
+
     printf("\n");
-    
-    for (int i=result->length-1; i>=0; i--) {
+
+    for (i=result->length-1; i>=0; i--) {
         printf("%c", result->resultA[i]);
     }
-    
+
     printf("\n");
-    
+
     free(result->resultA);
     free(result->resultB);
     free(result);
@@ -95,11 +98,11 @@ void sw(const char *s1, const char *s2, const int sub) {
 int getDiagonalLength(int slice, int z, int dim) {
     int i = z;
     int j = slice - z;
-    
+
     if (slice <= dim-1) {
         return  j + 1;
     }
-    
+
     return  j - i + 1;
 }
 
@@ -112,25 +115,25 @@ swResult *traceback(const char *s1, const char *s2, int *memory, int *matrix) {
 
     while ((currentPos.i != nextPos.i || currentPos.j != nextPos.j) &&
            nextPos.i >= 0 && nextPos.j >= 0) {
-        
+
         if (nextPos.i == currentPos.i) {
             stringA[length] = '-';
         } else {
             stringA[length] = s2[currentPos.i - 1];
         }
-        
+
         if (nextPos.j == currentPos.j) {
             stringB[length] = '-';
         } else {
             stringB[length] = s1[currentPos.j  - 1];
         }
-        
+
         currentPos = nextPos;
-        
+
         if (currentPos.i > 0 && currentPos.j > 0) {
             nextPos = getNextPosition(currentPos.i, currentPos.j, dim, memory);
         }
-        
+
         length++;
     }
 
@@ -141,7 +144,7 @@ swResult *traceback(const char *s1, const char *s2, int *memory, int *matrix) {
     strcpy(result->resultA, stringA);
     strcpy(result->resultB, stringB);
     result->length = length;
-    
+
     return result;
 }
 
@@ -151,18 +154,18 @@ position getNextPosition(int i, int j, int dim, int *memory) {
     if (direction == NORTH_WEST) {
         return (position) {i-1, j-1};
     }
-    
+
     if (direction == NORTH) {
         return (position) {i-1, j};
     }
-    
+
     if (direction == WEST) {
         return (position) {i, j-1};
     }
-    
+
     if (direction == CENTER) {
         return (position) {i, j};
     }
-    
+
     return (position) {-1, -1};
 }

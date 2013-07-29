@@ -14,23 +14,24 @@ void freeMatrix(int *matrix) {
 
 int *initMatrix(int dim) {
     dim = dim + 1;
-    
+
     int *matrix = malloc(sizeof(int) * dim * dim);
 
-    for (int i=0; i < dim; i++)
-        for (int j=0; j < dim; j++)
+    int i, j;
+    for (i=0; i < dim; i++)
+        for (j=0; j < dim; j++)
             matrix[j+i*dim] = 0;
-    
+
     return matrix;
 }
 
 position maximumValue(int *matrix, int dim) {
-    
     int maxValue = 0;
     position max;
-    
-    for (int i=0; i<dim; i++) {
-        for (int j=0; j<dim; j++) {
+
+    int i, j;
+    for (i=0; i<dim; i++) {
+        for (j=0; j<dim; j++) {
             if (matrix[j+i*dim] > maxValue) {
                 maxValue = matrix[j+i*dim];
                 max.i = i;
@@ -38,18 +39,19 @@ position maximumValue(int *matrix, int dim) {
             }
         }
     }
-    
+
     return max;
 }
 
 void printMatrix(int *matrix, int dim) {
-    for (int i=0; i<dim; i++) {
-        for (int j=0; j<dim; j++) {
+    int i, j;
+    for (i=0; i<dim; i++) {
+        for (j=0; j<dim; j++) {
             printf("%i ", matrix[j+i*dim]);
         }
-        
+
         printf("\n");
     }
-    
+
     printf("\n");
 }

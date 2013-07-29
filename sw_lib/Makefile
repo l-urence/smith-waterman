@@ -1,24 +1,40 @@
 TARGET = sw
-LIBS = -lm
 CC = gcc
-CFLAGS = -g -Wall -std=c99
+CFLAGS = -Wall -std=c99
+
+OBJECTS = $(patsubst %.c, %.o, $(wildcard *.c))
+HEADERS = $(wildcard *.h)
+
+UNAME := $(shell uname)
+
+ifeq ($(UNAME), Linux)
+INCL_P  = -I$(HOME)/inc -I/usr/local/cuda/include
+LIBS   = -lm -lOpenCL -lrt
+INCL_AMD = -I$(HOME)/inc -I$(AMDAPPSDKROOT)/include
+LIBS_AMD = -L$(AMDAPPSDKROOT)/lib/x86_64 $(LIBS)
+CFLAGS_AMD  = $(CFLAGS) -DATI_OS_LINUX
+endif
+ifeq ($(UNAME), Darwin)
+INCL_P   = -I$(HOME)/inc
+LIBS     = -framework OpenCL
+INCL_AMD = $(INCL_P)
+LIBS_AMD = $(LIBS)
+CFLAGS_AMD = $(CFLAGS)
+endif
 
 .PHONY: default all clean
 
 default: $(TARGET)
 all: default
 
-OBJECTS = $(patsubst %.c, %.o, $(wildcard *.c))
-HEADERS = $(wildcard *.h)
-
 %.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-.PRECIOUS: $(TARGET) $(OBJECTS)
+	$(CC)  -c $< -o $@
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) -Wall $(LIBS) -o $@
+	$(CC) $(CFLAGS) $(OBJECTS) -framework opencl  -o $(TARGET)
 
 clean:
-	-rm -f *.o
-	-rm -f $(TARGET)
+	rm -f $(OBJECTS)
+
+cleanall: clean
+	rm -f $(TARGET)
