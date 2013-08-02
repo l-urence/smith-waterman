@@ -2,6 +2,7 @@ TARGET = sw
 CC = gcc
 CFLAGS = -g -Wall
 
+KERNEL = kernel.cl
 OBJECTS = $(patsubst %.c, %.o, $(wildcard *.c))
 HEADERS = $(wildcard *.h)
 
@@ -22,7 +23,7 @@ all: default
 %.o: %.c $(HEADERS)
 	$(CC)  -c $< -o $@
 
-$(TARGET): $(OBJECTS)
+$(TARGET): $(OBJECTS) $(KERNEL)
 	$(CC) $(CFLAGS) $(OBJECTS) $(LIBS) -o $(TARGET)
 
 clean:

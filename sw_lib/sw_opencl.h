@@ -10,18 +10,9 @@
 #define dna_sw_opencl_h
 
 #include "sw_serial.h"
+#include "simpleCL.h"
 
-#ifdef __APPLE__
-#include "OpenCL/opencl.h"
-#else
-#include "CL/cl.h"
-#endif
-
-#define NUM_VALUES 3
-
-void compute(int *matrix, int *memory, char *s1, char *s2, int *subMatrix, int subLength, int dim, int sub);
-
-void opencl();
-
+void compute();
+void createSubMatrix(int *matrix, int i, int j, int sub, int dim);
 
 #endif

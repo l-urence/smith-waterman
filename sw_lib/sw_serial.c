@@ -20,33 +20,33 @@ int match(char ai, char bj) {
 // north-west cells of the current cell.
 void findMaximum(int *matrix, int *memory, int i, int j, char a, char b, int dim) {
     int max = 0;
-    
+
     int mm = matrix[(j-1)+(i-1)*dim] + match(a, b);
     if (mm > max) {
         max = mm;
         memory[j+i*dim] = NORTH_WEST;
     }
-    
+
     int md = matrix[j+(i-1)*dim] + GAP;
     if (md > max) {
         max = md;
         memory[j+i*dim] = NORTH;
     }
-    
+
     int mi = matrix[(j-1)+i*dim] + GAP;
     if (mi > max) {
         max = mi;
         memory[j+i*dim] = WEST;
     }
-    
+
     if (max == 0) {
         memory[j+i*dim] = CENTER;
     }
-    
+
     matrix[j+i*dim] = max;
 }
 
-void test(int *matrix, int *memory, int i, int j, const char *s1, const char *s2, int sub, int dim) {   
+void test(int *matrix, int *memory, int i, int j, const char *s1, const char *s2, int sub, int dim) {
     int ii, jj;
     for (ii = i; ii < sub + i; ++ii) {
         for (jj = j; jj < sub + j; ++jj)
@@ -70,6 +70,7 @@ void sw(const char *s1, const char *s2, const int sub) {
     	int z = slice < max ? 0 : slice - max + 1;
         for (j = z; j <= slice - z; ++j) {
             test(matrix, memory, j*sub, (slice - j)*sub, s1, s2, sub, dim);
+            createSubMatrix(matrix, j*sub, (slice - j)*sub, sub, dim);
         }
     }
 
