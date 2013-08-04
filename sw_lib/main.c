@@ -9,8 +9,6 @@
 // #include <stdio.h>
 #include "sw_serial.h"
 #include "sw_opencl.h"
-#include "sw_file.h"
-
 
 
 int main(int argc, const char *argv[])
@@ -30,10 +28,8 @@ int main(int argc, const char *argv[])
     //char *s1 = "ANANAS";
     //char *s2 = "BANANE";
 
-    //sw(s1, s2, 4);
+    sw(s1, s2, 4);
     compute();
-
-    //compute(NULL, NULL, 0, 0);
 
     return 0;
 }

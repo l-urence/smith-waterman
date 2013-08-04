@@ -9,7 +9,6 @@
 #ifndef dna_sw_serial_h
 #define dna_sw_serial_h
 
-#include <stdio.h>
 #include "matrix.h"
 #include <math.h>
 #include "sw_opencl.h"
@@ -25,15 +24,15 @@ typedef struct swResult {
 } swResult;
 
 enum direction {
-    CENTER = 0,
-    NORTH = 1,
-    NORTH_WEST = 2,
-    WEST = 3
+    CENTER, NORTH, NORTH_WEST, WEST
 };
 
 
 void sw(const char *s1, const char *s2, int sub);
 int match(char ai, char bj);
+void validateSubMatrix(int *matrix, int *memory, int i, int j, const char *s1,
+                       const char *s2, int sub, int dim);
+
 void findMaximum(int *matrix, int *memory, int i, int j, char a, char b, int dim);
 swResult *traceback(const char *s1, const char *s2, int *memory, int *matrix);
 int getDiagonalLength(int slice, int z, int dim);

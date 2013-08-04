@@ -11,16 +11,24 @@
 void compute()
 {
     int devices = 0;
+    int dataLength = 8;
     sclHard gpu = sclGetCPUHardware(0, &devices);
-    sclSoft kernal = sclGetCLSoftware("kernel.cl", "test", gpu);
+    sclSoft kernel = sclGetCLSoftware("kernel.cl", "sw", gpu);
 
     size_t global_size[2];
     size_t local_size[2];
 
-    global_size[0] = 1024; global_size[1] = 1;
-    local_size[0] = 64; local_size[0] = 1;
+    global_size[0] = dataLength; global_size[1] = 1;
+    local_size[0] = 4; local_size[1] = 1;
 
-    sclManageArgsLaunchKernel(gpu, kernel, );
+    int vector = 0;
+
+    sclManageArgsLaunchKernel(gpu, kernel, global_size, local_size,
+                               "%R", sizeof(int), (void *) &vector);
+
+    printf("%i, ", vector);
+
+    printf("\n");
 }
 
 

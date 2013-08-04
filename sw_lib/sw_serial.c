@@ -46,13 +46,16 @@ void findMaximum(int *matrix, int *memory, int i, int j, char a, char b, int dim
     matrix[j+i*dim] = max;
 }
 
-void test(int *matrix, int *memory, int i, int j, const char *s1, const char *s2, int sub, int dim) {
+
+void validateSubMatrix(int *matrix, int *memory, int i, int j, const char *s1,
+                       const char *s2, int sub, int dim) {
     int ii, jj;
     for (ii = i; ii < sub + i; ++ii) {
         for (jj = j; jj < sub + j; ++jj)
             findMaximum(matrix, memory, ii+1, jj+1, s1[jj], s2[ii], dim);
     }
 }
+
 
 void sw(const char *s1, const char *s2, const int sub) {
     const int m = ((int) strlen(s2));
@@ -69,7 +72,7 @@ void sw(const char *s1, const char *s2, const int sub) {
     for (slice = 0; slice < 2 * max - 1; ++slice) {
     	int z = slice < max ? 0 : slice - max + 1;
         for (j = z; j <= slice - z; ++j) {
-            test(matrix, memory, j*sub, (slice - j)*sub, s1, s2, sub, dim);
+            validateSubMatrix(matrix, memory, j*sub, (slice - j)*sub, s1, s2, sub, dim);
             createSubMatrix(matrix, j*sub, (slice - j)*sub, sub, dim);
         }
     }

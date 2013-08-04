@@ -11,6 +11,7 @@
 
 #include "sw_serial.h"
 #include "simpleCL.h"
+#include <limits.h>
 
 void compute();
 void createSubMatrix(int *matrix, int i, int j, int sub, int dim);
