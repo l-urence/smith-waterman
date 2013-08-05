@@ -16,34 +16,29 @@ void printMatrix(int *matrix, int dim);
 __kernel void sw (
     __global int *matrix,
     __global int *memory,
-    //__global int *indexes,
-    //__global char *s1,
-    //__global char *s2
-    __global int *dim
-    //__global ind sub
+    __global int *dim,
+    __global int *subIndexes,
+    __global int *sub
 )
 {
-    // int ii = indexes[x * 2 + 0];
-    // int jj = indexes[x * 2 + 1];
+  int x = get_global_id(0);
+  int i = subIndexes[2*x+0];
+  int j = subIndexes[2*x+1];
 
-    int i, j;
-    for (i=0; i<*dim; i++) {
-        for (j=0; j<*dim; j++) {
-            printf("%i ", matrix[j+i*(*dim)]);
-        }
-
-        printf("\n");
+  int ii, jj;
+  for (ii = i; ii < *sub + i; ++ii)
+  {
+    for (jj = j; jj < *sub + j; ++jj)
+    {
+      int i2 = ii + 1;
+      int j2 = jj + 2;
+      printf("%i ", matrix[j2+i2*(*dim)]);
+      //printf("i");
+      // findMaximum(matrix, memory, ii+1, jj+1, s1[jj], s2[ii], dim);
     }
 
     printf("\n");
-
-
-
-    // printf("(%i, %i)\n", ii, jj);
-    /*for (ii = i; ii < sub + i; ++ii) {
-        for (jj = j; jj < sub + j; ++jj)
-            findMaximum(matrix, memory, ii+1, jj+1, s1[jj], s2[ii], dim);
-    }*/
+  }
 }
 
 

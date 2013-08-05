@@ -11,31 +11,29 @@
 
 #include "matrix.h"
 #include <math.h>
-#include "sw_opencl.h"
 
 #define MATCH 2
 #define MISS_MATCH -1
 #define GAP -1
 
 typedef struct swResult {
-    char *resultA;
-    char *resultB;
-    int length;
+  char *resultA;
+  char *resultB;
+  int length;
 } swResult;
 
 enum direction {
-    CENTER, NORTH, NORTH_WEST, WEST
+  CENTER, NORTH, NORTH_WEST, WEST
 };
 
 
 void sw(const char *s1, const char *s2, int sub);
 int match(char ai, char bj);
 void validateSubMatrix(int *matrix, int *memory, int i, int j, const char *s1,
-                       const char *s2, int sub, int dim);
+    const char *s2, int sub, int dim);
 
 void findMaximum(int *matrix, int *memory, int i, int j, char a, char b, int dim);
 swResult *traceback(const char *s1, const char *s2, int *memory, int *matrix);
-int getDiagonalLength(int slice, int z, int dim);
 position getNextPosition(int i, int j, int dim, int *memory);
 
 #endif

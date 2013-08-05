@@ -9,49 +9,49 @@
 #include "matrix.h"
 
 void freeMatrix(int *matrix) {
-    free(matrix);
+  free(matrix);
 }
 
 int *initMatrix(int dim) {
-    dim = dim + 1;
+  dim = dim + 1;
 
-    int *matrix = malloc(sizeof(int) * dim * dim);
+  int *matrix = malloc(sizeof(int) * dim * dim);
 
-    int i, j;
-    for (i=0; i <= dim; i++)
-        for (j=0; j <= dim; j++)
-            matrix[j+i*dim] = 0;
+  int i, j;
+  for (i=0; i <= dim; i++)
+    for (j=0; j <= dim; j++)
+      matrix[j+i*dim] = 0;
 
-    return matrix;
+  return matrix;
 }
 
 position maximumValue(int *matrix, int dim) {
-    int maxValue = 0;
-    position max;
+  int maxValue = 0;
+  position max;
 
-    int i, j;
-    for (i=0; i<dim; i++) {
-        for (j=0; j<dim; j++) {
-            if (matrix[j+i*dim] > maxValue) {
-                maxValue = matrix[j+i*dim];
-                max.i = i;
-                max.j = j;
-            }
-        }
+  int i, j;
+  for (i=0; i<dim; i++) {
+    for (j=0; j<dim; j++) {
+      if (matrix[j+i*dim] > maxValue) {
+        maxValue = matrix[j+i*dim];
+        max.i = i;
+        max.j = j;
+      }
     }
+  }
 
-    return max;
+  return max;
 }
 
 void printMatrix(int *matrix, int dim) {
-    int i, j;
-    for (i=0; i<dim; i++) {
-        for (j=0; j<dim; j++) {
-            printf("%i ", matrix[j+i*dim]);
-        }
-
-        printf("\n");
+  int i, j;
+  for (i=0; i<dim; i++) {
+    for (j=0; j<dim; j++) {
+      printf("%i ", matrix[j+i*dim]);
     }
 
     printf("\n");
+  }
+
+  printf("\n");
 }
