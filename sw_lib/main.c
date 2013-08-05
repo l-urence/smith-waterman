@@ -29,7 +29,6 @@ int main(int argc, const char *argv[])
     //char *s2 = "BANANE";
 
     sw(s1, s2, 4);
-    compute();
 
     return 0;
 }

@@ -9,24 +9,37 @@ void findMaximum(int *matrix, int *memory, int i, int j, char a, char b, int dim
 // Check if a character a is equal to a character b.
 int match(char ai, char bj);
 
+// Print out matrix
+void printMatrix(int *matrix, int dim);
+
 // Smith Waterman openCL kernel funktion.
 __kernel void sw (
-    //__global int *matrix,
-    //__global int *memory,
-    __global int *indexes
+    __global int *matrix,
+    __global int *memory,
+    //__global int *indexes,
     //__global char *s1,
     //__global char *s2
-    //__global int dim,
+    __global int *dim
     //__global ind sub
 )
 {
-    int x = get_global_id(0);
+    // int ii = indexes[x * 2 + 0];
+    // int jj = indexes[x * 2 + 1];
 
-    indexes[x] = x;
+    int i, j;
+    for (i=0; i<*dim; i++) {
+        for (j=0; j<*dim; j++) {
+            printf("%i ", matrix[j+i*(*dim)]);
+        }
 
-    //int i = indexes[0+x*2];
-    //int j = indexes[1+x*2];
+        printf("\n");
+    }
 
+    printf("\n");
+
+
+
+    // printf("(%i, %i)\n", ii, jj);
     /*for (ii = i; ii < sub + i; ++ii) {
         for (jj = j; jj < sub + j; ++jj)
             findMaximum(matrix, memory, ii+1, jj+1, s1[jj], s2[ii], dim);
@@ -73,5 +86,18 @@ void findMaximum(int *matrix, int *memory, int i, int j, char a, char b, int dim
     }
 
     matrix[j+i*dim] = max;
+}
+
+void printMatrix(int *matrix, int dim) {
+    int i, j;
+    for (i=0; i<dim; i++) {
+        for (j=0; j<dim; j++) {
+            printf("%i ", matrix[j+i*dim]);
+        }
+
+        printf("\n");
+    }
+
+    printf("\n");
 }
 

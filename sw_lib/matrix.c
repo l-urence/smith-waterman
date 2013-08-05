@@ -18,8 +18,8 @@ int *initMatrix(int dim) {
     int *matrix = malloc(sizeof(int) * dim * dim);
 
     int i, j;
-    for (i=0; i < dim; i++)
-        for (j=0; j < dim; j++)
+    for (i=0; i <= dim; i++)
+        for (j=0; j <= dim; j++)
             matrix[j+i*dim] = 0;
 
     return matrix;

@@ -13,7 +13,7 @@
 #include "simpleCL.h"
 #include <limits.h>
 
-void compute();
+void compute(int *matrix, int *memory, int dim);
 void createSubMatrix(int *matrix, int i, int j, int sub, int dim);
 
 #endif

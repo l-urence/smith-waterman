@@ -60,9 +60,9 @@ void validateSubMatrix(int *matrix, int *memory, int i, int j, const char *s1,
 void sw(const char *s1, const char *s2, const int sub) {
     const int m = ((int) strlen(s2));
     const int n = ((int) strlen(s1));
-    int *matrix = initMatrix(m);
-    int *memory = initMatrix(m);
     int dim = m + 1;
+    int *matrix = initMatrix(dim);
+    int *memory = initMatrix(dim);
 
     if (m % sub != 0 && n % sub != 0) return;
 
@@ -73,10 +73,10 @@ void sw(const char *s1, const char *s2, const int sub) {
     	int z = slice < max ? 0 : slice - max + 1;
         for (j = z; j <= slice - z; ++j) {
             validateSubMatrix(matrix, memory, j*sub, (slice - j)*sub, s1, s2, sub, dim);
-            //createSubMatrix(matrix, j*sub, (slice - j)*sub, sub, dim);
         }
     }
-
+    compute(matrix, memory, dim);
+    printMatrix(matrix, dim );
     swResult *result = traceback(s1, s2, memory, matrix);
 
     int i;
