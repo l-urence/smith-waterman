@@ -20,8 +20,10 @@ __kernel void sw (
     //__global ind sub
 )
 {
-    // int x = get_global_id(0);
-    *indexes = 10;
+    int x = get_global_id(0);
+
+    indexes[x] = x;
+
     //int i = indexes[0+x*2];
     //int j = indexes[1+x*2];
 
@@ -72,5 +74,4 @@ void findMaximum(int *matrix, int *memory, int i, int j, char a, char b, int dim
 
     matrix[j+i*dim] = max;
 }
-
 

@@ -73,7 +73,7 @@ void sw(const char *s1, const char *s2, const int sub) {
     	int z = slice < max ? 0 : slice - max + 1;
         for (j = z; j <= slice - z; ++j) {
             validateSubMatrix(matrix, memory, j*sub, (slice - j)*sub, s1, s2, sub, dim);
-            createSubMatrix(matrix, j*sub, (slice - j)*sub, sub, dim);
+            //createSubMatrix(matrix, j*sub, (slice - j)*sub, sub, dim);
         }
     }
 

@@ -7,26 +7,28 @@
 //
 #include "sw_opencl.h"
 
-
 void compute()
 {
     int devices = 0;
-    int dataLength = 8;
-    sclHard gpu = sclGetCPUHardware(0, &devices);
+    int dataLength = 1024;
+    sclHard gpu = sclGetGPUHardware(0, &devices);
     sclSoft kernel = sclGetCLSoftware("kernel.cl", "sw", gpu);
 
     size_t global_size[2];
     size_t local_size[2];
 
     global_size[0] = dataLength; global_size[1] = 1;
-    local_size[0] = 4; local_size[1] = 1;
+    local_size[0] = 1; local_size[1] = 1;
 
-    int vector = 0;
+    int vector[dataLength];
 
     sclManageArgsLaunchKernel(gpu, kernel, global_size, local_size,
-                               "%R", sizeof(int), (void *) &vector);
+                               "%R",
+                               (sizeof(int)*dataLength), (void *) vector);
 
-    printf("%i, ", vector);
+    int i = 0;
+    for (i=0; i<dataLength; i++)
+        printf("%i, ", vector[i]);
 
     printf("\n");
 }
