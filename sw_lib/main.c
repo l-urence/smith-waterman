@@ -7,7 +7,6 @@
 //
 
 // #include <stdio.h>
-#include "sw_serial.h"
 #include "sw_opencl.h"
 
 
@@ -24,24 +23,24 @@ int main(int argc, const char *argv[])
   //char *s2 = "AAABA";
   //char *s1 = "ANANASDDDEEEEEEEEEEEEEE";
   //char *s2 = "BANANEXXXEEEEEEEEEEEEEE";
-  char *s1 = "ACACACTAACACACTA";
-  char *s2 = "AGCACACAAGCACACA";
+  char *s1 = "ACACACTA";
+  char *s2 = "AGCACACA";
   //char *s1 = "ANANAS";
   //char *s2 = "BANANE";
 
-  /*int i = 0;
-  for (i = 0; i < 10; i++)
+  int i = 0;
+  int sub = 4;
+  for (i = 0; i < 100; i++)
   {
-    sw(s1, s2, 4);
+    sw(s1, s2, sub);
     printf("\n");
-  }*/
+  }
 
-  sclHard device = sclGetCPUHardware(0, &devices);
+  sclHard device = sclGetGPUHardware(0, &devices);
   sclSoft kernel = sclGetCLSoftware("kernel.cl", "sw", device);
 
-  int i = 0;
-  for (i = 0; i < 1; i++) {
-    parallel_sw(s1, s2, 4, device, kernel);
+  for (i = 0; i < 100; i++) {
+    parallel_sw(s1, s2, sub, device, kernel);
   }
 
   sclReleaseClSoft(kernel);

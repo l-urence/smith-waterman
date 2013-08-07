@@ -94,8 +94,8 @@ void sw(const char *s1, const char *s2, const int sub) {
   free(result->resultA);
   free(result->resultB);
   free(result);
-  freeMatrix(memory);
-  freeMatrix(matrix);
+  free(memory);
+  free(matrix);
 }
 
 

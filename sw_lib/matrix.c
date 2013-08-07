@@ -8,19 +8,16 @@
 
 #include "matrix.h"
 
-void freeMatrix(int *matrix) {
-  free(matrix);
-}
-
 int *initMatrix(int dim) {
-  dim = dim + 1;
-
-  int *matrix = malloc(sizeof(int) * dim * dim);
-
-  int i, j;
-  for (i=0; i <= dim; i++)
-    for (j=0; j <= dim; j++)
-      matrix[j+i*dim] = 0;
+  int length = dim * dim;
+  int *matrix = malloc(sizeof(int) * length);
+  int *ptr;
+  int i = 0;
+  for (ptr = matrix; ptr < (matrix + length); ++ptr)
+  {
+    *ptr = 0;
+    ++i;
+  }
 
   return matrix;
 }

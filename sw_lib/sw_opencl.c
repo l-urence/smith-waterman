@@ -8,7 +8,7 @@
 #include "sw_opencl.h"
 
 void compute(int *matrix, int *memory, int dim, int sub,
-             int *subIndexes, int subLength,
+             int *subIndexes, int subLength, const char *s1, const char *s2,
              sclHard device, sclSoft kernel)
 {
   size_t global_size[2];
@@ -18,12 +18,14 @@ void compute(int *matrix, int *memory, int dim, int sub,
   local_size[0] = 1; local_size[1] = 1;
 
   sclManageArgsLaunchKernel(device, kernel, global_size, local_size,
-      "%R, %R, %r, %r, %r",
+      "%R, %R, %r, %r, %r %r, %r",
       dim * dim * sizeof(int), (void *) matrix,
       dim * dim * sizeof(int), (void *) memory,
       sizeof(int), (void *) &dim,
       sizeof(int) * subLength * 2, (void *) subIndexes,
-      sizeof(int), (void *) &sub
+      sizeof(int), (void *) &sub,
+      sizeof(char) * (dim - 1), (void *) s1,
+      sizeof(char) * (dim - 1), (void *) s2
   );
 }
 
@@ -55,14 +57,35 @@ void parallel_sw(const char *s1, const char *s2, int sub,
       i++;
     }
 
-    compute(matrix, memory, dim, sub, subIndexes, subLength, device, kernel);
-    printf("\n");
+    compute(matrix, memory, dim, sub, subIndexes, subLength, s1, s2,
+            device, kernel);
+
+    //printf("\n");
 
     free(subIndexes);
   }
 
-  freeMatrix(matrix);
-  freeMatrix(memory);
+  swResult *result = traceback(s1, s2, memory, matrix);
+
+  int i;
+  for (i=result->length-1; i>=0; i--) {
+    printf("%c", result->resultB[i]);
+  }
+
+  printf("\n");
+
+  for (i=result->length-1; i>=0; i--) {
+    printf("%c", result->resultA[i]);
+  }
+
+  printf("\n");
+
+  free(result->resultA);
+  free(result->resultB);
+  free(result);
+
+  free(matrix);
+  free(memory);
 }
 
 

@@ -13,16 +13,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+//
 typedef struct position
 {
     int i;
     int j;
 } position;
 
-
+//
 int *initMatrix(int dim);
-void freeMatrix(int *matrix);
+
+//
 position maximumValue(int *matrix, int dim);
+
+//
 void printMatrix(int *matrix, int dim);
 
 
