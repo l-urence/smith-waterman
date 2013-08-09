@@ -1,32 +1,40 @@
 #include "sw_file.h"
 
-char *read_file_contents(const char *filename)
+char **getStrings(char *filename, int lineLength, int *numLines)
 {
-  long size;
-  char *ret = NULL;
-  char *contents = NULL;
-  FILE *fh;
+  // Add 2 to the line length for newline characters.
+  lineLength = lineLength + 2;
 
-  if (!(fh = fopen(filename,"r")))
+  FILE *f;
+  char **lines = NULL;
+  char line[lineLength];
+  f = fopen(filename, "r");
+
+  if (f == NULL)
     return NULL;
 
-  fseek(fh,0,SEEK_END);
-  size = ftell(fh);
-  if (size < 1)
-    goto out;
-  fseek(fh,0,SEEK_SET);
+  while(fgets(line, lineLength, f))
+  {
+    *numLines = *numLines + 1;
+    lines = (char**)realloc(lines, sizeof(char*)*(*numLines));
+    removeNewLine(line);
+    lines[(*numLines)-1] = strdup(line);
+  }
 
-  if (!(contents = malloc(size+1)))
-    goto out;
-  if ((fread(contents, 1, size, fh) != size))
-    goto out;
+  fclose(f);
 
-  contents[size] = 0;
-
-  ret = contents;
-  contents = NULL;
-out:
-  fclose(fh);
-  free(contents);
-  return ret;
+  return lines;
 }
+
+
+void removeNewLine(char *string)
+{
+  char *c = strchr(string, '\n');
+  if (c)
+    *c = '\0';
+
+  c = strchr(string, '\r');
+  if (c)
+    *c = '\0';
+}
+

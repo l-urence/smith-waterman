@@ -1,10 +1,3 @@
-//
-//  sw_opencl.c
-//  test_sw
-//
-//  Created by Laurence Bortfeld on 10.06.13.
-//  Copyright (c) 2013 Hochschule fuer Technik und Wirtschaft. All rights reserved.
-//
 #include "sw_opencl.h"
 
 void compute(int *matrix, int *memory, int dim, int sub,
@@ -50,8 +43,6 @@ void parallel_sw(const char *s1, const char *s2, int sub,
     int i = 0;
 
     for (j = z; j <= slice - z; ++j) {
-      // printf("(i: %i, j: %i, l: %i), ", j*sub, (slice - j)*sub,
-      //       getDiagonalLength(slice, z, sub));
       subIndexes[2*i+0] = j * sub;
       subIndexes[2*i+1] = (slice  - j) *sub;
       i++;
@@ -59,8 +50,6 @@ void parallel_sw(const char *s1, const char *s2, int sub,
 
     compute(matrix, memory, dim, sub, subIndexes, subLength, s1, s2,
             device, kernel);
-
-    //printf("\n");
 
     free(subIndexes);
   }

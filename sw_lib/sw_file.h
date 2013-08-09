@@ -1,11 +1,3 @@
-//
-//  file.h
-//  test_sw
-//
-//  Created by Laurence Bortfeld on 06.07.13.
-//  Copyright (c) 2013 Hochschule fuer Technik und Wirtschaft. All rights reserved.
-//
-
 #ifndef sw_file_h
 #define sw_file_h
 
@@ -13,6 +5,14 @@
 #include <string.h>
 #include <stdlib.h>
 
-char *read_file_contents(const char *filename);
+// Error constans
+#define SW_READ_FILE_ERROR   -1
+#define SW_READ_FILE_SUCCESS  0
+
+//
+char **getStrings(char *filename, int lineLength, int *numLines);
+
+//
+void removeNewLine(char *string);
 
 #endif
