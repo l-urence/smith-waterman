@@ -6,18 +6,16 @@ Diese Arbeit befasst sich mit der Parallelisierung eines Algorithmus für Sequen
 # Smith-Waterman Algorithmus
 Der Smith-Waterman Algorithmus ist konstruiert um das optimale Alignment zweier Zeichenketten oder Sequenzen zu bestimmen. T.F.  Smith und M.S. Waterman veröffentlichten den Algorithmus 1981 in dem Paper: *Identification of common molecular subsequences*. Wie der zuvor entworfene Algorithmus von Needleman & Wunsch (1970) wird mit Hilfe einer Matrix das lokale Alignment berechnet. Es gibt eine viel Zahl von heuristischen Algorithmen, welche vor der Entwicklung des Smith-Waterman Algorithmus verfasst worden, jedoch sind diese für biologische Untersuchungen nicht hinreichend genug oder nicht interpretierbar. 1982 verbesserte Gotoh den Algorithmus vom Smith & Waterman. Der Ursprüngliche Algorithmus benötigte $M^2N$ Schritte um das lokale Alignment zu erhalten, Gotoh reduzierte die benötigten Schritte auf $MN$, wobei $M$ und $N$ ($M\ge N$) die Längen der zu vergleichenden Zeichenketten bzw. Sequenzen sind. \cite{sw:paper, sw:gotoh}
 
-Bevor jedoch der Algorithmus vom Smith & Waterman beschrieben wird, soll der Unterschied zwischen lokalen und globalen Aligments geklärt werden. Lokale bzw. globale Alignments betrachten die zu untersuchenden Sequenzen unterschiedlich und ermitteln somit verschiedene Ergebnisse. Ein globales Alignment betrachtet das Alignment auf der gesamten Länge der Sequenzen (vgl. Listing \ref{alignment:global}). Hingen betrachtet das lokale Alignment nur ähnliche Abschnitte in einer Sequenz (vgl. \ref{alignment:lokal}). Nun ist es möglich, dass mehrere lokale Alignments in einer Sequenz vorkommen, um das optimale lokale Alignment zu bestimmen, wählt ein Algorithmus das Alignment mir der höchsten Wertigkeit aus.
+Bevor jedoch der Algorithmus vom Smith & Waterman beschrieben wird, soll der Unterschied zwischen lokalen und globalen Aligments geklärt werden. Lokale bzw. globale Alignments betrachten die zu untersuchenden Sequenzen unterschiedlich und ermitteln somit verschiedene Ergebnisse. Ein globales Alignment betrachtet das Alignment auf der gesamten Länge der Sequenzen (vgl. Listing \ref{alignment}). Hingen betrachtet das lokale Alignment nur ähnliche Abschnitte in einer Sequenz (vgl. Listing \ref{alignment}). Nun ist es möglich, dass mehrere lokale Alignments in einer Sequenz vorkommen, um das optimale lokale Alignment zu bestimmen, wählt ein Algorithmus das Alignment mir der höchsten Wertigkeit aus. Der Needleman & Wunsch Algorithmus ermittelt ein globales Alignment, indessen der Smith-Waterman Algorithmus ein optimales lokales Alignment bestimmt. \cite{sw:alignment}
 
-\lstinputlisting[label=alignment:global, caption={Globales Alignment}]{./src_examples/global_alignemt.txt}
-
-\lstinputlisting[label=alignment:lokal, caption={Lokales Alignment}]{./src_examples/lokal_alignemt.txt}
+\lstinputlisting[label=alignment, caption={Beispiel für globales und lokales Alignment}]{./src_examples/alignemt.txt}
 
 ## Algorithmus
 
 
-## Serieller - Ansatz
+## Serieller Ansatz
 
-## Paralleler - Ansatz mittels OpenCL
+## Paralleler Ansatz mittels OpenCL
 
 # DNA
 Die DNA (Desoxyribonukleinsäure) ist ein Biomolekül und ist Bestandteil jedes Lebewesen und Viren. Es besteht aus vielen Bestandteilen, den sogenannten Nukleotiden. Jedes Nukleotid besteht aus Phosphorsäure bzw. Phosphat und Zucker (Desoxyribose) sowie einer einer Base. Bei der Base kann es sich um Adenin (A), Thymin (T), Cytosin (C) oder Guanin (G) handeln. Die Phosphorsäure und der Zucker sind immer gleich und bilden den Strang des DNA Moleküls. Dabei bilden immer zwei Nukleotide anhand ihrer Basen ein Basenpaar. Es können jedoch nur Basenpaare aus Adenin und Thymin oder Cytosin und Guanin gebildet werden (siehe Abbildung \ref{fig:dna1}). Anhand der Komplexität der DNA Sequenz, die beim Menschen aus 3.101.788.170 Basenpaaren besteht, erfolgt die DNA Sequenzierung abschnittsweise. \cite{dna:dna}

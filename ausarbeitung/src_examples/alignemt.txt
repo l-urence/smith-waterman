@@ -1,0 +1,7 @@
+Global alignment:
+A: A----DDAAAA-XXX----------A
+B: AOPIODDAAAAZXXXASDASDASDAA
+
+Local alignment:
+A: DDAAAA-XXX
+B: DDAAAAZXXX
