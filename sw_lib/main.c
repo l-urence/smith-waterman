@@ -45,15 +45,17 @@ int main(int argc, char * const argv[])
   if ((strings = getStrings(filename, lineLength, &numLines)) == NULL)
     printError("Can not open file");
 
-  int i = 0, j = 0;
-  for (i=0; i<numLines; i++)
-      printf("%s\n", strings[i]);
+  //int i = 0, j = 0;
+  //for (i=0; i<numLines; i++)
+  //    printf("%s\n", strings[i]);
 
 
-/*  int devices = 0;
-  int sub = 4;
-  char *s1 = "ACACACTA";
-  char *s2 = "AGCACACA";
+  int devices = 0;
+  int sub = 2;
+  // char *s1 = "ACACACTA";
+  // char *s2 = "AGCACACA";
+  char *s1 = "ASDASDDAAAAXXXIUOIUOIUOOPA";
+  char *s2 = "AOPIODDAAAAZXXXASDASDASDAA";
 
   sclHard device = sclGetCPUHardware(0, &devices);
   sclSoft kernel = sclGetCLSoftware("kernel.cl", "sw", device);
@@ -62,7 +64,7 @@ int main(int argc, char * const argv[])
   parallel_sw(s1, s2, sub, device, kernel);
 
   sclReleaseClSoft(kernel);
-  sclReleaseClHard(device);*/
+  sclReleaseClHard(device);
 
   free(strings);
   return EXIT_SUCCESS;
