@@ -1,0 +1,15 @@
+\begin{figure*}[!t]
+  \hfil
+\[ H(i,j) = max \left \{
+    \begin{array}{lc}
+        H(i-1,j-1) + w(a_i,b_j) \quad & \text{Match/Mismatch} \\
+        H(i-1,j) + w(a_i,-)     \quad & \text{Deletion}       \\
+        H(i,j-1) + w(-,b_j)     \quad & \text{Insertion}      \\
+    \end{array} \right\}, 1 \le i \le m, 1 \le j \le n \]
+
+    \[ w(\text{match}) = +2;\quad  w(a,-) = w(-,b) = w(mismatch) = -1 \]
+    \hrulefill
+% The spacer can be tweaked to stop underfull vboxes.
+\vspace*{4pt}
+  \end{figure*}
+

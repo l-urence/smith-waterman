@@ -12,8 +12,11 @@ Bevor jedoch der Algorithmus vom Smith & Waterman beschrieben wird, soll der Unt
 
 ## Algorithmus
 Der Smith-Waterman Algorithmus basiert auf dem Paradigma der dynamischen Programmierung. Hierbei ist "Programmierung" nicht im Sinne von schreiben von Code zu verstehen, dynamische Programmierung löst das Probleme durch das Ausfüllen einer Tabelle (Matrix). Wie auch bei bei der Methode von "teile und herrsche" zerlegt dynamische Programmierung ein Probleme in viele leichter zu lösende Teilprobleme, deren Ergebnisse in einer Tabelle hinterlegt werden. Jedoch sind die Teilprobleme untereinander von einander Abhängig, da ihre Berechnungen bzw. Lösungen auf denen der Vorgänger beruhen. Generell lässt sich dynamische Programmierung auf Optimierungsprobleme anwenden. Solche Probleme bestehen aus einer Vielzahl von korrekten Lösungen, wohingegen nur eine optimale Lösung des Problems (Minima, Maxima) von Interesse ist. \cite{sw:dynamic_prog}
+Gegeben sind zwei Zeichenketten bzw. Sequenzen ${A=a_1a_2\dots a_n \text{ und } B=b_1b_2\dots b_n}$. 
 
-Gegeben sind zwei Zeichenketten bzw. Sequenzen $A=a_1a_2\dots a_n \text{ und } B=b_1b_2\dots b_n$
+\input{./img/sw_eq}
+
+
 
 ## Serieller Ansatz
 
