@@ -54,8 +54,8 @@ int main(int argc, char * const argv[])
   int sub = 2;
   // char *s1 = "ACACACTA";
   // char *s2 = "AGCACACA";
-  char *s1 = "ASDASDDAAAAXXXIUOIUOIUOOPA";
-  char *s2 = "AOPIODDAAAAZXXXASDASDASDAA";
+  char *s1 = "AAUGCCAUUGACGG";
+  char *s2 = "CAGCCUCGCUUAGX";
 
   sclHard device = sclGetCPUHardware(0, &devices);
   sclSoft kernel = sclGetCLSoftware("kernel.cl", "sw", device);

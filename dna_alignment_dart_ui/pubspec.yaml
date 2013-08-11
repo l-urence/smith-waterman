@@ -1,6 +1,0 @@
-name: dna_alignment_ui
-description: A sample WebUI application
-dependencies:
-  browser: any
-  js: any
-  web_ui: any
