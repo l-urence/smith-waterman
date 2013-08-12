@@ -1,0 +1,13 @@
+\begin{figure*}[!t]
+  \hfil
+  \begin{equation}
+    \label{eq:sw}
+      H(i,j) = max \left \{
+      \begin{array}{ll}
+        H(i-1,j-1) + s(a_i,b_j) \quad & \text{Match/Mismatch} \\
+        H(i-1,j) + s(a_i,-)     \quad & \text{Deletion}       \\
+        H(i,j-1) + s(-,b_j)     \quad & \text{Insertion}      \\
+      \end{array} \right.
+  \end{equation}
+  \hrulefill
+\end{figure*}

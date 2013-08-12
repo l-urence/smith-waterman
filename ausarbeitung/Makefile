@@ -18,9 +18,9 @@ $(TEXT_FILE).tex: $(TEXT_FILE).md
 		$(TEXT_FILE).tex; \
 	done;
 
-$(DOCUMENT).pdf: $(OBJ) $(TEXT_FILE).tex ./bib/internet.bib ./bib/print.bib
+$(DOCUMENT).pdf: $(TEXT_FILE).tex ./bib/internet.bib ./bib/print.bib
 	@pdflatex $(DOCUMENT)
-	@bibtex $(DOCUMENT)1 
+	@bibtex $(DOCUMENT)1
 	@bibtex $(DOCUMENT)2
 	@echo "..."
 	@pdflatex $(DOCUMENT) > /dev/null
@@ -34,8 +34,8 @@ google: $(DOCUMENT).pdf
 
 clean:
 	@echo "Delete generated files. Except the pdf."
-	rm -f *.aux *.gz *.log *.toc *.out *.lof *.bbl *.blg *.dvi *.glo *.xdy *.ist 
-	rm -f $(TEXT_FILE).tex *.log *.bak
+	@find . | grep -E ".*\.(aux|gz|log|toc|out|lof|bbl|blg|dvi|bak|glo|xdy|ist)" \
+		| xargs rm -f	rm -f $(TEXT_FILE).tex
 
 cleanall: clean
 	@echo "Delete pdf"

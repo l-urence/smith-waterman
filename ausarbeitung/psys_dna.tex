@@ -9,6 +9,7 @@
 % Graphics %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{graphicx}
 \usepackage{pgfplots}
+\usepackage{subfigure}
 
 % Enumerations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{enumerate}
@@ -43,19 +44,24 @@
   basicstyle=\footnotesize, breaklines=true
 }
 
-% correct bad hyphenation here %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Correct bad hyphenation here %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \hyphenation{
   op-tical net-works semi-conduc-tor bei-spiels-weise konfi-guriert
   zwi-schen ejabberd er-rei-chen er-leich-tert hier-bei SIMON alice
-  ASSCII che-mische ver-gleich-bare be-stimmten
+  ASSCII che-mische ver-gleich-bare be-stimmten CGCGATCGATCGTACG
 }
 
-%Source code listings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Source code listings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{listings}
 
+% Fix two column figures %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \makeatletter
 \@dblfptop 0pt
 \makeatother
+
+% Drawing Matrix %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz}
+\usetikzlibrary{matrix}
 
 \begin{document}
 
