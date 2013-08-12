@@ -16,7 +16,7 @@ Gegeben sind zwei Zeichenketten bzw. Sequenzen ${A=a_1a_2\dots a_n \text{ und } 
 \input{./eq/sw}
 
 ## Beispiel
-Im Folgenden soll ein Beispiel gegeben werden, welches den Algorithmus verdeutlichen soll. Anhand der Zeichenketten $A=\text{BANANE und } B=\text{ANANAS}$, wobei die Parameter für den Vergleich wie wie folgt gewählt sind: \input{./eq/param}
+Im Folgenden soll ein Beispiel gegeben werden, welches den Algorithmus verdeutlichen soll. Anhand der Zeichenketten $A=\text{ANANAS und } B=\text{BANANE}$, wobei die Parameter für den Vergleich wie wie folgt gewählt sind: \input{./eq/param}
 Die Abbildungen Fig. \ref{fig:matrix:init} und \ref{fig:matrix:comp} zeigen die Initialisierung der Matrix $M$ sowie die Berechnung der jeweiligen Elemente vom $M$ durch die vorher festgelegten Vergleiche aus der Formel \ref{eq:sw}. Die Pfeile in der Abbildung Fig. \ref{fig:matrix:comp} zeigen auf das Element aus dem sich das Element an der Stelle $H_{ij}$ ergibt.
 
 \input{./img/matrix_1}
