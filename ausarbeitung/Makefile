@@ -1,3 +1,4 @@
+OBJ = $(shell find . -name "*.tex")
 DOCUMENT = psys_dna
 TEXT_FILE = psys_dna_text
 
@@ -18,7 +19,7 @@ $(TEXT_FILE).tex: $(TEXT_FILE).md
 		$(TEXT_FILE).tex; \
 	done;
 
-$(DOCUMENT).pdf: $(TEXT_FILE).tex ./bib/internet.bib ./bib/print.bib
+$(DOCUMENT).pdf: $(TEXT_FILE).tex $(OBJ) ./bib/internet.bib ./bib/print.bib
 	@pdflatex $(DOCUMENT)
 	@bibtex $(DOCUMENT)1
 	@bibtex $(DOCUMENT)2

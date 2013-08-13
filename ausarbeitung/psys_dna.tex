@@ -38,11 +38,21 @@
 % Math %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{mathtools}
 
+% Alogorithmic %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{algorithmicx,algpseudocode}
+\usepackage{algorithm}
+\captionsetup[algorithm]{font=footnotesize}
+\makeatletter
+\renewcommand{\ALG@name}{Pseudocode}
+\makeatother
+
 % Listings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{listings}
 \lstset{
-  basicstyle=\footnotesize, breaklines=true
+  basicstyle=\footnotesize, breaklines=true, frame=tb
 }
+\DeclareCaptionFormat{listing}{\rule{\linewidth}{.8pt}\par\vskip1pt#1#2#3}
+\captionsetup[lstlisting]{format=listing,singlelinecheck=false, margin=0pt,labelsep=space,labelfont=bf}
 
 % Correct bad hyphenation here %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \hyphenation{

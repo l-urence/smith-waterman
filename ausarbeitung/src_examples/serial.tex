@@ -1,0 +1,33 @@
+\begin{algorithm}
+  \caption{Implementierung Smith-Waterman serieller Ansatz}
+  \label{seriel}
+  \begin{algorithmic}[1]
+    \Require $A,B \in [A-Z]$
+    \State $H\gets$ InitMatrix()
+    \State $M\gets$ InitMatrix()
+      \ForAll{$1\le i\le n$}  \Comment{Scoring the matirx}
+        \ForAll{$1\le j\le m$}
+          \State $H_{ij} \gets FindMaximumWith(a_i, b_j)$
+          \State $M_{ij} \gets MemomorizeMaxDirection()$
+        \EndFor
+    \EndFor
+    \State $\text{Result}_a, \text{Result}_b$
+    \State $\text{Current} \gets$ MaximumValueIn($H$)
+    \State $\text{Next} \gets$ GetNextWith($M$, Current)
+    \While{Current $\ne$ Next $\land$ Next $\ne$ 0} \Comment{Traceback}
+      \If{$\text{Next}_i = \text{Current}_i$} \Comment{Deletion in $A$}
+        \State $\text{Result}_a \gets$ '-'
+      \Else \Comment{Match/Mismatch in $A$}
+        \State $\text{Result}_a \gets$ A[$\text{Current}$]
+      \EndIf
+      \If{$\text{Next}_j = \text{Current}_j$} \Comment{Deletion in $B$}
+        \State $\text{Result}_b \gets$ '-'
+      \Else \Comment{Match/Mismatch in $B$}
+        \State $\text{Result}_b \gets$ B[$\text{Current}$]
+      \EndIf
+      \State $\text{Current} = \text{Next}$
+      \State $\text{Next} \gets$ GetNextWith($M$, Current)
+    \EndWhile
+    \State \Return $\text{Result}_a$, $\text{Result}_b$
+  \end{algorithmic}
+\end{algorithm}
