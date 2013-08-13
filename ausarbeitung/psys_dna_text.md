@@ -31,7 +31,9 @@ Die Implementierung des seriellen Ansatzes hat im Kern zwei Matrizen. Die erste 
 \input{./src_examples/serial.tex}
 
 ## Paralleler Ansatz mittels OpenCL
-Für eine parallele Implementierung des Smith-Waterman Algorithmus ist das Erkennen der Abhängigkeiten der Operatoren, welche in der Formel \ref{eq:sw} definiert sind, notwendig. Aus den Indizes der benutzen Operatoren ($i-1,j-1$, $i-1,j$ und $i,j-1$) um auf Elemente aus $H$ zuzugreifen geht hervor, dass die Operationen von Vorgängerwerten in der Matrix abhängen.
+Für eine parallele Implementierung des Smith-Waterman Algorithmus ist das Erkennen der Abhängigkeiten der Operatoren, welche in der Formel \ref{eq:sw} definiert sind, notwendig. Aus den Indizes der benutzen Operatoren ($i-1,j-1$, $i-1,j$ und $i,j-1$) um auf Elemente aus $H$ zuzugreifen geht hervor, dass die Operationen von Vorgängerwerten in der Matrix abhängen. Dies macht es nicht möglich $H$ Zeile für Zeile parallel auszufüllen. Eine andere Herangehensweise ist es die Matrix in Antidiagonalen^[Die Addition von $i$ und $i$ gibt pro Antidiagonale immer den selben Wert.] zu berechnen. 
+
+\cite{sw:parallel}
 
 ### OpenCL
 

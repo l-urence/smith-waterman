@@ -21,8 +21,6 @@ psys_dna.texbak
 psys_dna.tex
 psys_dna_text.tex
 smith_waterman_cli
-packages
-dna_alignment_dart_ui/web/out/
 sw
 *.class
 *.seq
