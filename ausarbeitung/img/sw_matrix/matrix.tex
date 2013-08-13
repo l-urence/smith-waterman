@@ -21,13 +21,14 @@
 
 \begin{tikzpicture}[baseline=(sw.center)]
     \tikzset{BarreStyle/.style =   {opacity=.4,line width=4 mm,line cap=round,color=#1}}
-    \tikzset{SignePlus/.style =   {opacity=.4,circle,fill=#1}}
-    \tikzset{TraceBack/.style =   {opacity=.4,circle,fill=#1}}
-
+    \tikzset{SignePlus/.style =   {opacity=.4,circle,fill=#1}},
+    \tikzset{TraceBack/.style =   {opacity=.4,circle,fill=#1}},
+    \tikzset{frame/.style={draw=#1, rounded corners=2pt}},
+    \tikzset{block/.style={fill=#1,opacity=.4, rounded corners=2pt}}
     \matrix [%
       matrix of math nodes,
-      column sep=.5em,
-      row sep=.5em
+      column sep=.0em,
+      row sep=.0em
     ] (sw) {%
         / & - & A & N & A & N & A & S \\
         - & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
@@ -64,22 +65,40 @@
    % (sw-7-5) edge[->] (sw-8-5) (sw-7-6) edge[->] (sw-8-6)
    % (sw-7-6) edge[->] (sw-8-7) (sw-7-7) edge[->] (sw-8-8);
 
-    \draw
-    (sw-3-3) node[SignePlus=blue] {$0$}
-    [BarreStyle=blue] (sw-4-3.south west) edge[SignePlus=blue] (sw-3-4.north east)
-    [BarreStyle=blue] (sw-5-3.south west) edge[SignePlus=blue] (sw-3-5.north east)
-    [BarreStyle=blue] (sw-6-3.south west) edge[SignePlus=blue] (sw-3-6.north east)
-    [BarreStyle=blue] (sw-7-3.south west) edge[SignePlus=blue] (sw-3-7.north east)
-    [BarreStyle=blue] (sw-8-3.south west) edge[SignePlus=blue] (sw-3-8.north east)
-    [BarreStyle=blue] (sw-8-4.south west) edge[SignePlus=blue] (sw-4-8.north east)
-    [BarreStyle=blue] (sw-8-5.south west) edge[SignePlus=blue] (sw-5-8.north east)
-    [BarreStyle=blue] (sw-8-6.south west) edge[SignePlus=blue] (sw-6-8.north east)
-    [BarreStyle=blue] (sw-8-7.south west) edge[SignePlus=blue] (sw-7-8.north east)
-    (sw-8-8) node[SignePlus=blue] {$6$}
+    %\draw
+    %(sw-3-3) node[SignePlus=blue] {$0$}
+    %[BarreStyle=blue] (sw-4-3.south west) edge[SignePlus=blue] (sw-3-4.north east)
+    %[BarreStyle=blue] (sw-5-3.south west) edge[SignePlus=blue] (sw-3-5.north east)
+    %[BarreStyle=blue] (sw-6-3.south west) edge[SignePlus=blue] (sw-3-6.north east)
+    %[BarreStyle=blue] (sw-7-3.south west) edge[SignePlus=blue] (sw-3-7.north east)
+    %[BarreStyle=blue] (sw-8-3.south west) edge[SignePlus=blue] (sw-3-8.north east)
+    %[BarreStyle=blue] (sw-8-4.south west) edge[SignePlus=blue] (sw-4-8.north east)
+    %[BarreStyle=blue] (sw-8-5.south west) edge[SignePlus=blue] (sw-5-8.north east)
+    %[BarreStyle=blue] (sw-8-6.south west) edge[SignePlus=blue] (sw-6-8.north east)
+    %[BarreStyle=blue] (sw-8-7.south west) edge[SignePlus=blue] (sw-7-8.north east)
+    %(sw-8-8) node[SignePlus=blue] {$6$}
     %(sw-7-6) node[TraceBack=red] {$8$} (sw-6-5) edge[->] (sw-7-6)
     %(sw-6-5) node[TraceBack=red] {$6$} (sw-5-4) edge[->] (sw-6-5)
     %(sw-5-4) node[TraceBack=red] {$4$} (sw-4-3) edge[->] (sw-5-4)
     %(sw-4-3) node[TraceBack=red] {$2$} (sw-3-2) edge[->] (sw-4-3)
-    ;
+
+    \path[frame=black]
+    (sw-2-2.north west) rectangle (sw-5-5.south east)
+    (sw-5-5.north west) rectangle (sw-8-8.south east);
+
+    \path[frame=red]
+    (sw-2-5.north west) rectangle (sw-5-8.south east)
+    (sw-5-2.north west) rectangle (sw-8-5.south east);
+
+    \path[block=green]
+    (sw-3-3.north west) rectangle (sw-5-5.south east)
+    (sw-6-6.north west) rectangle (sw-8-8.south east);
+
+    \path[block=blue]
+    (sw-3-6.north west) rectangle (sw-5-8.south east)
+    (sw-6-3.north west) rectangle (sw-8-5.south east);
+
+
+
 \end{tikzpicture}
 \end{document}

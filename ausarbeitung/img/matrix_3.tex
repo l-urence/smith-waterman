@@ -1,15 +1,17 @@
 \begin{figure}
 \hfill
-\subfigure[Initialisierung der Matrix $M$.]{%
+\subfigure[Jedes Element in einer Antidiagonalen kann parallel berechnet
+werden.]{%
   \includegraphics[width=.48\linewidth]{./img/sw_matrix/matrix_04.pdf}%
-  \label{fig:matrix:init}%
+  \label{fig:anti}%
 }
 \hfill
-\subfigure[Berechnen der Elemente von $M$ mit Operationen aus der Formel
-\ref{eq:sw}.]{%
+\subfigure[Jede Submatrix kann pro Antidiagonale (grün, blau) parallel berechenet werden.]{%
   \includegraphics[width=.48\linewidth]{./img/sw_matrix/matrix_05.pdf}%
-  \label{fig:matrix:comp}%
+  \label{fig:sub}%
 }
 \hfill
-\caption{Initialisierung und Berechnung der Matrix $M$.}
+\caption{Parallele Ausführung des Smith-Waterman Algorithmus mittels Antidiagonalen.
+Antidiagonale müssen seriel berechnete werden. Jedoch sind ihre Element
+voneinander unabhängig}
 \end{figure}
