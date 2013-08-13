@@ -10,7 +10,6 @@
 *.bak
 *.dylib
 *.xcodeproj
-ausarbeitung/*.pdf
 .buildlog
 *.build
 *~
