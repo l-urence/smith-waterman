@@ -1,0 +1,15 @@
+\begin{algorithm}
+  \caption{Implementierung Smith-Waterman paralleler Ansatz}
+  \label{parallel}
+  \begin{algorithmic}[1]
+    \Require $A,B \in [A-Z]$
+    \State $H\gets$ InitMatrix()
+    \State $M\gets$ InitMatrix()
+      \ForAll{$1\le i\le n$}  \Comment{Scoring the matirx}
+        \State $\text{SubMatrixs} \gets$ getSubmatrixFor($i$)
+        \State computeSubmatrixsInParallel($\text{SubMatrixes}$, $A$, $B$)
+      \EndFor
+    \State doSerialTraceBackWith($H$, $M$)
+    \State \Return $\text{Result}_a$, $\text{Result}_b$
+  \end{algorithmic}
+\end{algorithm}
