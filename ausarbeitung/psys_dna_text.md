@@ -35,11 +35,14 @@ Für eine parallele Implementierung des Smith-Waterman Algorithmus ist das Erken
 
 \input{./img/matrix_3}
 
-### OpenCL
+### OpenCL^[Dieser Abschnitt soll lediglich einen Einblick in die Funktionsweise OpenCLs geben, jedoch keine Einführung in die Programmierung mittels OpenCL, da es eine Vielzahl davon im Internet zu finden ist.]
+Die Open Computing Language ist ein Plattform übergreifender Standart, welcher für das Entwickeln von Anwendungen auf hoch parallelen Prozessoren entworfen ist. Basierend auf der C99 Programmiersprache können Kernel auf der CPU oder GPU ausgeführt werden. Die OpenCL Spezifikation bezeichnet Geräte auf denen das Programm ausgeführt wird im allgemeinen als *Device*. Jedes *Device* besteht aus einer Reihe von *Compute Units*. Die *Compute Unit* besteht aus mehreren Prozessorelementen und einem Lokalen Speicher. Eine *Workgroup* wird auf einer *Compute Unit* ausgeführt, die *Compute Units*, welche den Prozessorkernen entsprechen limitieren die gleichzeitige Ausführung. Das dabei auf der GPU oder CPU ausgeführte Programm, heißt *Kernel*. Der *Kernel* ist eine Funktion, die in der OpenCL Sprache verfasst ist und zur Laufzeit für das entsprechende *Device* kompiliert wird. Während der gleichzeitigen Ausführung rechnen eine Vielzahl von "Kernel Instanzen" auf verschiedenen Bereichen der zu bearbeitenden Daten. Der *Host*, das Programm, welches den *Kernel* aufruft, alloziert Speicher für die benötigten Argumente der *Kernel* Funktion und übergibt sie dieser beim Aufruf. Nach der Abarbeitung der Daten, können diese wieder ausgelesen werden und der vorher allozierte Speicher freigegeben. \cite{cl:apple}
 
-### SimpleCL
+### SimpleOpenCL
+Aus dem OpenCL Beispiel des Apple Developer Guide \cite{cl:example} geht hervor, dass die Programmierung mittels OpenCL einen Großteil von Boilerplate Code erzeugt. Dieser ist für die Initialisierung von OpenCl, das Allozieren und Kopieren von Speicher auf die *Devices* notwendig. Sowie das Ausführen des *Kernels*, das Abrufen von Ergebnissen und das Freigen und Beenden von OpenCL. Er macht den Quellcode unübersichtlich, den Umgang mit OpenCL aufwändig und schwer wartbar. SimpleOpenCL implementiert OpenCL, bietet jedoch über eine C Bibliothek eine sehr vereinfachte Schnittstelle zu OpenCL. Ausgerichtet für die Bedürfnisse wissenschaftlicher Untersuchungen und die Entwicklung von Prototypen, ermöglicht SimpleOpenCl einen einfacheren Umgang mit OpenCL und erleichtre die Entwicklung erheblich. Durch SimpleOpenCL lässt sich der "Host Code" um den Kernel auszuführen stark reduzieren, dabei bleibt der "Kernel Code" exakt der gleiche wie bei einer regulären OpenCL implementation. \cite{cl:simple}
 
 ### Implementation
+
 
 # DNA
 Die DNA (Desoxyribonukleinsäure) ist ein Biomolekül und ist Bestandteil jedes Lebewesen und Viren. Es besteht aus vielen Bestandteilen, den sogenannten Nukleotiden. Jedes Nukleotid besteht aus Phosphorsäure bzw. Phosphat und Zucker (Desoxyribose) sowie einer einer Base. Bei der Base kann es sich um Adenin (A), Thymin (T), Cytosin (C) oder Guanin (G) handeln. Die Phosphorsäure und der Zucker sind immer gleich und bilden den Strang des DNA Moleküls. Dabei bilden immer zwei Nukleotide anhand ihrer Basen ein Basenpaar. Es können jedoch nur Basenpaare aus Adenin und Thymin oder Cytosin und Guanin gebildet werden (siehe Abbildung \ref{fig:dna1}). Anhand der Komplexität der DNA Sequenz, die beim Menschen aus 3.101.788.170 Basenpaaren besteht, erfolgt die DNA Sequenzierung abschnittsweise. \cite{dna:dna}
@@ -52,6 +55,7 @@ Der Vergleich (Alignment) von DNA Sequenzen spielt eine wichtige Rolle in der Fo
 In der Forensik können DNA Sequenzen mit einer vorgegebenen Sequenz verglichen werden, um Täter zu identifizieren. In der Forschung können z.B. Spezies mit anderen Spezies oder defekte DNA Sequenzen mit korrekten DNA Sequenzen verglichen werden. \cite{dna:dna}
 
 # Ergebnisse
+Für das ermitteln der Performance, der seriellen bzw. parallelen Ausführung des Smith-Waterman Algorithmus wurden zufällige Zeichenketten bestehen aus den Buchstabenpaaren ""AT", "TA", "CG", "GC" mit fester Länge generiert und untereinander verglichen.
 
 # Zusammenfassung
 
