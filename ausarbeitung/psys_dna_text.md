@@ -60,8 +60,14 @@ Der Vergleich (Alignment) von DNA Sequenzen spielt eine wichtige Rolle in der Fo
 In der Forensik können DNA Sequenzen mit einer vorgegebenen Sequenz verglichen werden, um Täter zu identifizieren. In der Forschung können z.B. Spezies mit anderen Spezies oder defekte DNA Sequenzen mit korrekten DNA Sequenzen verglichen werden. \cite{dna:dna}
 
 # Ergebnisse
-Für das ermitteln der Performance, der seriellen bzw. parallelen Ausführung des Smith-Waterman Algorithmus wurden zufällige Zeichenketten bestehen aus den Buchstabenpaaren ""AT", "TA", "CG", "GC" mit fester Länge generiert und untereinander verglichen.
+\input{./img/results.tex}
+
+Für das ermitteln der Performance, der seriellen bzw. parallelen Ausführung des Smith-Waterman Algorithmus wurden zufällige Zeichenketten generiert und untereinander verglichen. Dieser Prozess wurde einige Male wiederholt. Die zum Zeitpunkt der Messung vorhandene Hardware was ein MacBook Pro mit einem Intel Core 2 Duo @ 2,53 GHz, 8GB RAM und einer NVIDIA GeForce 9400M 256 MB. Tabelle \ref{tbl:results} zeigt einige Messungen. 
 
 # Zusammenfassung
+In der Arbeit konnte gezeigt werden, dass eine parallele Implementierung des Algorithmus von Smith & Waterman möglich ist. Jedoch ist die parallele Aufführung zum jetzigen Zeitpunkt nicht so performant wie der serielle Ansatz. Dies kann zum einen  daran liegen, dass der Algorithmus auf dynamischer Programmierung basiert, dessen Grenze zum großen Teil der Speicher ist und nicht die Geschwindigkeit mit welcher berechnet wird. Zum anderen handelt es sich bei der benutzen Grafikkarte um ein Notebook Model. Dies hatte bei hoher last Displayflackern, abstürze der Anwendung oder  extrem lange Laufzeiten zur folge. Trotz länger Laufzeit waren diese Effekte in großen Ausmaß bei der CPU als OpenCL Device nicht der Fall. Im Rahmen dieser Arbeit konnte ebenfalls nicht festgestellt werden, ob eine besser Performanz in nativem OpenCL Host Code anstelle von SimpleOpenCL möglich ist.
 
 # Ausblick
+Aufgrund von SimpleCL ist es erschwert möglich auf die Speicherverwaltung von OpenCL zu zugreifen. Von daher wäre eine Implementation ohne SimpleCL interessant, da diese nicht mehr in den Rahmen dieser Arbeit gepasst hat. Des Weiteren könnten Messungen unter aktuellerer und performanterer Hardware bessere Ergebnisse erzielen. 
+
+Eine andere Herangehensweise an die Parallelisierung hätte eventuell auch Auswirkungen auf eine schnellere Ausführung. Beispielsweise ließe sich der komplette Algorithmus als Kernel ausführen, nur die Aufrufe mit verschiedenen Zeichenketten würden parallel ausgeführt. Somit gäbe es keine Abhängigkeiten der Operationen des Algorithmus auf der Matrix $H$, da der Kernel Code selber seriell ausgeführt wird.

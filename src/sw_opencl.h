@@ -12,7 +12,7 @@ void compute(int *matrix, int *memory, int dim, int sub,
 
 //
 void parallel_sw(const char *s1, const char *s2, int sub,
-                 sclHard device, sclSoft kernel);
+                 sclHard device, sclSoft kernel, int verbose);
 
 
 #endif

@@ -24,15 +24,13 @@ void compute(int *matrix, int *memory, int dim, int sub,
 
 
 void parallel_sw(const char *s1, const char *s2, int sub,
-                 sclHard device, sclSoft kernel)
+                 sclHard device, sclSoft kernel, int verbose)
 {
   const int m = ((int) strlen(s2));
   const int n = ((int) strlen(s1));
   int dim = m + 1;
   int *matrix = initMatrix(dim);
   int *memory = initMatrix(dim);
-
-  if (m % sub != 0 && n % sub != 0) return;
 
   int max = n / sub;
   int slice, j;
@@ -56,18 +54,8 @@ void parallel_sw(const char *s1, const char *s2, int sub,
 
   swResult *result = traceback(s1, s2, memory, matrix);
 
-  int i;
-  for (i=result->length-1; i>=0; i--) {
-    printf("%c", result->resultB[i]);
-  }
-
-  printf("\n");
-
-  for (i=result->length-1; i>=0; i--) {
-    printf("%c", result->resultA[i]);
-  }
-
-  printf("\n");
+  if (verbose > 0)
+    printAlignments(result);
 
   free(result->resultA);
   free(result->resultB);

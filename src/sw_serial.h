@@ -28,7 +28,7 @@ enum direction {
 };
 
 //
-void sw(const char *s1, const char *s2, int sub);
+void sw(const char *s1, const char *s2, int sub, int verbose);
 
 //
 int match(char ai, char bj);
@@ -42,7 +42,11 @@ void findMaximum(int *matrix, int *memory, int i, int j, char a, char b, int dim
 
 //
 swResult *traceback(const char *s1, const char *s2, int *memory, int *matrix);
+
 //
 position getNextPosition(int i, int j, int dim, int *memory);
+
+//
+void printAlignments(swResult *result);
 
 #endif

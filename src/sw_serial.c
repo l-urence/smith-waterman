@@ -57,7 +57,7 @@ void validateSubMatrix(int *matrix, int *memory, int i, int j, const char *s1,
 }
 
 
-void sw(const char *s1, const char *s2, const int sub) {
+void sw(const char *s1, const char *s2, const int sub, int verbose) {
   const int m = ((int) strlen(s2));
   const int n = ((int) strlen(s1));
   int dim = m + 1;
@@ -78,24 +78,28 @@ void sw(const char *s1, const char *s2, const int sub) {
 
   swResult *result = traceback(s1, s2, memory, matrix);
 
-  int i;
-  for (i=result->length-1; i>=0; i--) {
-    printf("%c", result->resultB[i]);
-  }
-
-  printf("\n");
-
-  for (i=result->length-1; i>=0; i--) {
-    printf("%c", result->resultA[i]);
-  }
-
-  printf("\n");
+  if (verbose > 0)
+    printAlignments(result);
 
   free(result->resultA);
   free(result->resultB);
   free(result);
   free(memory);
   free(matrix);
+}
+
+void printAlignments(swResult *result)
+{
+  int i;
+  for (i=result->length-1; i>=0; i--)
+    printf("%c", result->resultB[i]);
+
+    printf("\n");
+
+  for (i=result->length-1; i>=0; i--)
+    printf("%c", result->resultA[i]);
+
+  printf("\n");
 }
 
 
