@@ -96,10 +96,19 @@ void printAlignments(swResult *result)
 
     printf("\n");
 
+  for (i=result->length-1; i >= 0; i--) {
+    if (result->resultA[i] == result->resultB[i])
+      printf("%s", ":");
+    else
+      printf("%s"," ");
+  }
+
+  printf("\n");
+
   for (i=result->length-1; i>=0; i--)
     printf("%c", result->resultA[i]);
 
-  printf("\n");
+  printf("\n\n");
 }
 
 

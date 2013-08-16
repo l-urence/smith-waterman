@@ -2,20 +2,16 @@
 
 int main(int argc, char * const argv[])
 {
-  int c;
-  int option_index = 0;
-  time_t time_start, time_end;
-  int sub = 1;
-  int runs = 1000;
-  int length = 20;
-  int deviceType = CPU;
-
-
+    int option_index = 0;
   // Parsing arguments
+  int c;
   while ((c = getopt_long(argc, argv, "s:l:d:s:r:h", long_options, &option_index)) != -1)
   {
     switch (c)
     {
+      case 0:
+      if (long_options[option_index].flag != 0)
+        break;
       case 's':
         sub = strtoumax(optarg, NULL, 10);
          if (sub == UINTMAX_MAX)
@@ -47,14 +43,17 @@ int main(int argc, char * const argv[])
   if (length % sub != 0)
     printError("stringLengh mod sub != 0 - Aboard");
 
-  char *s1 = malloc(sizeof(char) * length); // = "AAUGCCAUUGACGGAAUGCCAUUGACCGAASDASDASDAASASASASASA";
-  char *s2 = malloc(sizeof(char) * length); // = "CAGCCUCGCUUAGXCAGCCUCGCUUAGXAASDASDASASASASASASASA";
+  char *s1 = malloc(sizeof(char) * length);
+  char *s2 = malloc(sizeof(char) * length);
 
   genRandom(s1, length);
   genRandom(s2, length);
 
   printf("A: %s (%i)\nB: %s (%i)\n", s1, (int)strlen(s1), s2, (int)strlen(s2));
   printf("Submatrix size is set to: %i\n", sub);
+
+  time_t time_start, time_end;
+
   // Serial execution
   time(&time_start);
 
@@ -107,18 +106,17 @@ int main(int argc, char * const argv[])
 void printHelp()
 {
   printf("usage: sw -f file [-d device] [-s size]\n");
-  printf("  -f --file   \t Set the file to read in the strings.\n");
-  printf("  -l --length \t Set the string length.\n");
+  printf("     --verbose print out the alignments\n");
+  printf("  -l --length \t Set the random string length.\n");
   printf("  -d --device \t Set the openCL device [gpu/cpu]. Default: cpu.\n");
-  printf("  -s --size   \t Set the size of the submatrix for parallel computation.\n");
+  printf("  -r --runs   \t The the number of iterations\n");
+
 }
 
 //
 void genRandom(char *s, const int len)
 {
-    static const char alphanum[] =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        "abcdefghijklmnopqrstuvwxyz";
+    static const char alphanum[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     int i;
     for (i = 0; i < len; ++i)
