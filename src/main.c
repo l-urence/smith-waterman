@@ -110,6 +110,7 @@ void printHelp()
   printf("  -l --length \t Set the random string length.\n");
   printf("  -d --device \t Set the openCL device [gpu/cpu]. Default: cpu.\n");
   printf("  -r --runs   \t The the number of iterations\n");
+  printf("  -s --sub    \t Sets the dimension of the submatrix\n");
 
 }
 
