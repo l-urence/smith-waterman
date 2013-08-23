@@ -12,6 +12,7 @@ literatur
 *.dylib
 *.xcodeproj
 .buildlog
+ausarbeitung/*.pdf
 *.build
 *~
 *.o
