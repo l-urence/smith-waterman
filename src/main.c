@@ -2,9 +2,9 @@
 
 int main(int argc, char * const argv[])
 {
-    int option_index = 0;
-  // Parsing arguments
   int c;
+  int option_index = 0;
+  // Parsing arguments
   while ((c = getopt_long(argc, argv, "s:l:d:s:r:h", long_options, &option_index)) != -1)
   {
     switch (c)
@@ -29,7 +29,7 @@ int main(int argc, char * const argv[])
       case 'r':
         runs = strtoumax(optarg, NULL, 10);
          if (runs == UINTMAX_MAX)
-          printError("-r --runds must be an integer");
+          printError("-r --runs must be an integer");
         break;
       case 'h':
         printHelp();
@@ -64,7 +64,7 @@ int main(int argc, char * const argv[])
   }
 
   time(&time_end);
-  printf("Serial version @ %i runs : %4.2f secounds\n",
+  printf("Serial version @ %i runs : %4.2f sec\n",
       runs, (difftime(time_end, time_start)));
 
 
