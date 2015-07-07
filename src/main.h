@@ -3,6 +3,7 @@
 
 #include <getopt.h>
 #include <time.h>
+#include <inttypes.h>
 #include "sw_opencl.h"
 #include "sw_file.h"
 

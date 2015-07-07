@@ -17,5 +17,6 @@ void compute(int *matrix, int *memory, int dim, int sub,
 void parallel_sw(const char *s1, const char *s2, int sub,
                  sclHard device, sclSoft kernel, int verbose);
 
-
+// Comput length of the diagonal.
+int getDiagonalLength(int slice, int z, int sub);
 #endif
